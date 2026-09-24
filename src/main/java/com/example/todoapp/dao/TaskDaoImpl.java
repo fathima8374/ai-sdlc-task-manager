@@ -1,6 +1,7 @@
 package com.example.todoapp.dao;
 
 import com.example.todoapp.domain.Task;
+import com.example.todoapp.domain.Priority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -56,11 +57,24 @@ public class TaskDaoImpl implements TaskDao {
 
     @Override
     public void updateTask(int id, String description, Date date) {
-        if (taskRepository.findById(id).isPresent()) {
-            Task task = taskRepository.findById(id).get();
-            task.setId(id);
+        updateExistingTask(id, description, date, null, false);
+    }
+
+    @Override
+    public void updateTask(int id, String description, Date date, Priority priority) {
+        updateExistingTask(id, description, date, priority, true);
+    }
+
+    private void updateExistingTask(int id, String description, Date date,
+                                    Priority priority, boolean updatePriority) {
+        Optional<Task> existingTask = taskRepository.findById(id);
+        if (existingTask.isPresent()) {
+            Task task = existingTask.get();
             task.setDate(date);
             task.setDescription(description);
+            if (updatePriority) {
+                task.setPriority(priority);
+            }
             taskRepository.save(task);
         }
     }

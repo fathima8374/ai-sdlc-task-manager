@@ -1,6 +1,7 @@
 package com.example.todoapp.service;
 
 import com.example.todoapp.dao.TaskDao;
+import com.example.todoapp.domain.Priority;
 import com.example.todoapp.domain.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void updateTask(int id, String description, Date date) {
         taskDao.updateTask(id,description,date);
+    }
+
+    @Override
+    public void updateTask(int id, String description, Date date, Priority priority) {
+        taskDao.updateTask(id, description, date, priority);
     }
 
 }
