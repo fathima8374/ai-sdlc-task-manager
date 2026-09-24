@@ -21,6 +21,9 @@ public class Task {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
 
     public Task(){ }
 
@@ -30,9 +33,22 @@ public class Task {
         this.date = date;
     }
 
+    public Task(int id, String description, Date date, Priority priority) {
+        this.id = id;
+        this.description = description;
+        this.date = date;
+        this.priority = priority;
+    }
+
     public Task(String description, Date date) {
         this.description = description;
         this.date = date;
+    }
+
+    public Task(String description, Date date, Priority priority) {
+        this.description = description;
+        this.date = date;
+        this.priority = priority;
     }
 
     public int getId() {
@@ -57,5 +73,13 @@ public class Task {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }
