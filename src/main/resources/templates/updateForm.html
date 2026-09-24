@@ -21,6 +21,19 @@
         <label class="error" th:text="${msg}"></label>
         <input id="description" placeholder="description" th:field="*{description}" th:value="${updateTask.description}" type="text" minlength="5" maxlength="200" pattern="[^@#%&*${}()/><\][\\\x22,;|]+" title="@ # $ % ^ & * ( ) { } / \ NOT ALLOWED!" required/>
         <input id ="date" th:field= "*{date}" placeholder="Finish Date" th:value="${updateTask.date}" type="date" min="2019-12-31" required/>
+        <label class="error" for="priority" th:if="${priorityError}" th:text="${msg}"></label>
+        <select id="priority" name="priority" required th:if="${updateTask.priority == null}">
+            <option value="" disabled selected="selected">Select priority</option>
+            <option th:each="priority : ${priorityOptions}"
+                    th:value="${priority}"
+                    th:text="${priority}">Priority</option>
+        </select>
+        <select id="priority" th:field="*{priority}" required
+                th:unless="${updateTask.priority == null}">
+            <option th:each="priority : ${priorityOptions}"
+                    th:value="${priority}"
+                    th:text="${priority}">Priority</option>
+        </select>
         <button type="submit">SAVE TASK</button>
     </form>
     <br>
