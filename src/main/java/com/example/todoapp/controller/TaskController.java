@@ -1,11 +1,13 @@
 package com.example.todoapp.controller;
 
+import com.example.todoapp.domain.Priority;
 import com.example.todoapp.domain.Task;
 import com.example.todoapp.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -17,22 +19,27 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping("/addTask")
-    public String addTask(Task task, Model model) {
+    public String addTask(Task task, BindingResult bindingResult, Model model) {
+        addPriorityOptions(model);
+
+        if (bindingResult.hasFieldErrors("priority")) {
+            return renderCreateValidationError(task, model,
+                    "Invalid priority. Select High, Medium, or Low.");
+        }
+
+        if (task.getPriority() == null) {
+            return renderCreateValidationError(task, model,
+                    "Priority is required. Select High, Medium, or Low.");
+        }
 
         if (ifOnlyNumbers(task.getDescription())) {
-            List<Task> taskList = taskService.findAllTasks();
-            model.addAttribute("msg", "Description contains numbers only!");
-            model.addAttribute("taskList", taskList);
-            model.addAttribute("createTask", new Task());
-            return "home";
+            return renderCreateValidationError(task, model,
+                    "Description contains numbers only!");
         }
 
         if(DescriptionIsLessThanThreeFiveLetters(task.getDescription()) ){
-            List<Task> taskList = taskService.findAllTasks();
-            model.addAttribute("msg","Description is less than 5 letters!");
-            model.addAttribute("taskList", taskList);
-            model.addAttribute("createTask",new Task());
-            return "home";
+            return renderCreateValidationError(task, model,
+                    "Description is less than 5 letters!");
         }
 
 
@@ -52,6 +59,7 @@ public class TaskController {
         model.addAttribute("msg","");
         model.addAttribute("taskList", taskList);
         model.addAttribute("createTask",new Task());
+        addPriorityOptions(model);
         return "home";
     }
 
@@ -60,25 +68,36 @@ public class TaskController {
     public String updateTask (@PathVariable int id, Model model){
         Task task = taskService.findTaskById(id);
         model.addAttribute("updateTask",task);
+        addPriorityOptions(model);
         return "updateForm";
     }
 
     @PostMapping("/saveUpdate")
-    public String saveUpdate (Task task,Model model){
+    public String saveUpdate (Task task, BindingResult bindingResult, Model model){
+        addPriorityOptions(model);
+
+        if (bindingResult.hasFieldErrors("priority")) {
+            return renderUpdateValidationError(task, model,
+                    "Invalid priority. Select High, Medium, or Low.");
+        }
+
+        if (task.getPriority() == null) {
+            return renderUpdateValidationError(task, model,
+                    "Priority is required. Select High, Medium, or Low.");
+        }
 
         if (ifOnlyNumbers(task.getDescription())) {
-            model.addAttribute("msg", "Description contains numbers only! Please, Try again!");
-            model.addAttribute("updateTask",task);
-            return "updateForm";
+            return renderUpdateValidationError(task, model,
+                    "Description contains numbers only! Please, Try again!");
         }
 
         if(DescriptionIsLessThanThreeFiveLetters(task.getDescription()) ){
-            model.addAttribute("msg","Description is less than 5 letters! Please, Try again!");
-            model.addAttribute("updateTask",task);
-            return "updateForm";
+            return renderUpdateValidationError(task, model,
+                    "Description is less than 5 letters! Please, Try again!");
         }
 
-        taskService.updateTask(task.getId(),task.getDescription(),task.getDate());
+        taskService.updateTask(task.getId(),task.getDescription(),task.getDate(),
+                task.getPriority());
         return "redirect:/todo/home";
     }
 
@@ -108,6 +127,27 @@ public class TaskController {
                     return true;
                 else
                     return false;
+    }
+
+    private String renderCreateValidationError(Task task, Model model, String message) {
+        model.addAttribute("msg", message);
+        model.addAttribute("priorityError", message.startsWith("Priority")
+                || message.startsWith("Invalid priority"));
+        model.addAttribute("taskList", taskService.findAllTasks());
+        model.addAttribute("createTask", task);
+        return "home";
+    }
+
+    private String renderUpdateValidationError(Task task, Model model, String message) {
+        model.addAttribute("msg", message);
+        model.addAttribute("priorityError", message.startsWith("Priority")
+                || message.startsWith("Invalid priority"));
+        model.addAttribute("updateTask", task);
+        return "updateForm";
+    }
+
+    private void addPriorityOptions(Model model) {
+        model.addAttribute("priorityOptions", Priority.values());
     }
 
 }
