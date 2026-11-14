@@ -25,6 +25,9 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
+    @Column
+    private Boolean completed = false;
+
     public Task(){ }
 
     public Task(int id, String description, Date date) {
@@ -81,5 +84,13 @@ public class Task {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 }

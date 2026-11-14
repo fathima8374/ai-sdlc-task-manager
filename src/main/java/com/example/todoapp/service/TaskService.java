@@ -17,4 +17,5 @@ public interface TaskService {
      */
     void updateTask(int id, String description, Date date);
     void updateTask(int id, String description, Date date, Priority priority);
+    void updateCompletionStatus(int id, boolean completed);
     }

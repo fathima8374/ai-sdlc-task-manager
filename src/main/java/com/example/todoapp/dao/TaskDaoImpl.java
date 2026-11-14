@@ -65,6 +65,16 @@ public class TaskDaoImpl implements TaskDao {
         updateExistingTask(id, description, date, priority, true);
     }
 
+    @Override
+    public void updateCompletionStatus(int id, boolean completed) {
+        Optional<Task> existingTask = taskRepository.findById(id);
+        if (existingTask.isPresent()) {
+            Task task = existingTask.get();
+            task.setCompleted(completed);
+            taskRepository.save(task);
+        }
+    }
+
     private void updateExistingTask(int id, String description, Date date,
                                     Priority priority, boolean updatePriority) {
         Optional<Task> existingTask = taskRepository.findById(id);
