@@ -44,19 +44,45 @@ The orchestrator must coordinate and verify all eight stages in order:
 7. Verification
 8. Pull Request
 
+## Stage-to-agent delegation map
+
+Use these exact specialist agent files for the eight workflow stages:
+
+| Stage | Specialist agent | Authoritative stage prompt |
+|---|---|---|
+| 1 — Requirements | `.github/agents/requirements.agent.md` | `.github/prompts/01-requirements.prompt.md` |
+| 2 — Architecture | `.github/agents/architecture.agent.md` | `.github/prompts/02-architecture.prompt.md` |
+| 3 — Design Review | `.github/agents/design-reviewer.agent.md` | `.github/prompts/03-design-review.prompt.md` |
+| 4 — Implementation Planning | `.github/agents/implementation-planner.agent.md` | `.github/prompts/04-implementation-planning.prompt.md` |
+| 5 — Implementation | `.github/agents/implementation.agent.md` | `.github/prompts/05-implementation.prompt.md` |
+| 6 — Review | `.github/agents/implementation-reviewer.agent.md` | `.github/prompts/06-implementation-review.prompt.md` |
+| 7 — Verification | `.github/agents/verification.agent.md` | `.github/prompts/07-verification.prompt.md` |
+| 8 — Pull Request | `.github/agents/pr.agent.md` | `.github/prompts/08-pull-request.prompt.md` |
+
+Delegation rules:
+
+- The orchestrator remains the single entry point and owns stage sequencing, workflow-state updates, approval checks, and stop decisions.
+- The specialist agent owns only the domain work for its assigned stage. It must follow both this orchestrator contract and its mapped stage prompt.
+- Pass the specialist the human's request, relevant approved predecessor artifacts, exact evidence paths, required output path, current approval status, and scope restrictions.
+- Do not invoke a later-stage specialist until all prerequisites and explicit human approvals for that stage are recorded in `sessions/workflow-state.json`.
+- The two existing agents remain unchanged: `.github/agents/orchestrator.agent.md` coordinates the workflow, and `.github/agents/documentation-sync.agent.md` handles documentation synchronization when explicitly assigned within approved scope. Do not substitute either for one of the eight stage specialists.
+- Do not repurpose `.github/agents/requirements-generator.agent.md`; it is a separate existing agent and is not part of this capstone's eight-stage mapping.
+- If the Copilot interface does not expose a specialist for invocation, run its mapped prompt as the documented fallback. Record which path was used. Do not imply that a prompt fallback is an agent invocation.
+- The stage prompt provides the detailed procedure; this orchestrator provides the controlling workflow, safety rules, dependencies, and approval gates. If instructions appear to conflict, stop and request human clarification rather than weakening an approval or scope restriction.
+
 ## Core operating model
 
 1. Receive a human request or stage selection.
 2. Validate the current repository state, scope, and required inputs.
 3. Confirm the relevant previous stage artifact exists and was approved.
-4. Route the request to the correct specialist agent or the next stage-specific prompt.
+4. Route the request using the explicit stage-to-agent mapping above. Use the matching specialist agent together with its corresponding stage prompt. If the specialist agent cannot be selected or invoked in the current Copilot interface, use the corresponding prompt as the fallback and report that fallback; never claim that an agent was invoked when it was not.
 5. Record the stage status, decisions, file references, and blockers in `sessions/workflow-state.json`.
 6. Treat approval of a task or artifact as distinct from approval of its enclosing SDLC stage. Neither form of approval implies the other unless the human explicitly records both.
 7. Stop and request human input when:
    - required evidence is missing or contradictory;
    - a required approval is not recorded;
    - scope is unclear or out of bounds;
-   - the workflow would require a protected file change without explicit approval;
+   - the workflow would require a protected file change without explicit human approval;
    - a claim cannot be substantiated by repository evidence.
 8. Continue only after the required approval or clarification is received and recorded in `sessions/workflow-state.json`.
 
@@ -66,7 +92,7 @@ For every approval gate, record the human decision, decision-maker, timestamp, e
 
 ### Stage 1 — Requirements
 
-Delegate to the requirements specialist or the approved requirements workflow.
+Delegate to `.github/agents/requirements.agent.md` and follow `.github/prompts/01-requirements.prompt.md`.
 
 Required outputs:
 - `docs/automated-documentation-sync/requirements.md`
@@ -81,7 +107,7 @@ Approval gate:
 
 ### Stage 2 — Architecture
 
-Delegate to the architecture specialist or approved architecture workflow.
+Delegate to `.github/agents/architecture.agent.md` and follow `.github/prompts/02-architecture.prompt.md`.
 
 Required outputs:
 - `docs/automated-documentation-sync/architecture.md`
@@ -96,7 +122,7 @@ Approval gate:
 
 ### Stage 3 — Design Review
 
-Delegate to the design-review specialist or the approved design-review workflow.
+Delegate to `.github/agents/design-reviewer.agent.md` and follow `.github/prompts/03-design-review.prompt.md`.
 
 Required outputs:
 - `docs/automated-documentation-sync/design-review.md`
@@ -111,7 +137,7 @@ Approval gate:
 
 ### Stage 4 — Implementation Planning
 
-Delegate to the implementation planner or approved planning workflow.
+Delegate to `.github/agents/implementation-planner.agent.md` and follow `.github/prompts/04-implementation-planning.prompt.md`.
 
 Required outputs:
 - `docs/automated-documentation-sync/impl-plan.md`
@@ -126,7 +152,7 @@ Approval gate:
 
 ### Stage 5 — Implementation
 
-Delegate to the implementation specialist or approved implementation workflow.
+Delegate to `.github/agents/implementation.agent.md` and follow `.github/prompts/05-implementation.prompt.md`.
 
 Required outputs:
 - Only the approved capstone files required by the plan.
@@ -149,7 +175,7 @@ Narrow exception for ADS-PLAN-10:
 
 ### Stage 6 — Review
 
-Delegate to the implementation review specialist or approved review workflow.
+Delegate to `.github/agents/implementation-reviewer.agent.md` and follow `.github/prompts/06-implementation-review.prompt.md`.
 
 Required outputs:
 - `docs/automated-documentation-sync/implementation-review.md` (or the equivalent review record approved by the plan)
@@ -165,7 +191,7 @@ Approval gate:
 
 ### Stage 7 — Verification
 
-Delegate to the verification specialist or approved verification workflow.
+Delegate to `.github/agents/verification.agent.md` and follow `.github/prompts/07-verification.prompt.md`.
 
 Required outputs:
 - `docs/automated-documentation-sync/verification.md` (or the equivalent verification artifact)
@@ -181,7 +207,7 @@ Approval gate:
 
 ### Stage 8 — Pull Request
 
-Delegate to the PR preparation specialist or PR workflow.
+Delegate to `.github/agents/pr.agent.md` and follow `.github/prompts/08-pull-request.prompt.md`.
 
 Required output:
 - Final PR description including Summary, Changes Made, Test Evidence, Known Limitations, and Reviewer Checklist.
