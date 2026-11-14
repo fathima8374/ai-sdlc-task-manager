@@ -56,9 +56,33 @@ class TaskPriorityMigrationTest {
         assertThat(dateFor(101)).isEqualTo("2020-02-04");
     }
 
+    @Test
+    void backfillDefaultsLegacyNullCompletionStatusToPending() {
+        jdbcTemplate.update(
+                "INSERT INTO task (id, date, description, priority, completed) " +
+                        "VALUES (102, '2020-02-05', 'Legacy pending task', 'HIGH', NULL)");
+        jdbcTemplate.update(
+                "INSERT INTO task (id, date, description, priority, completed) " +
+                        "VALUES (103, '2020-02-06', 'Completed task', 'LOW', TRUE)");
+
+        migration.backfillNullCompletionStatuses();
+        migration.backfillNullCompletionStatuses();
+
+        assertThat(completedFor(102)).isFalse();
+        assertThat(completedFor(103)).isTrue();
+        assertThat(priorityFor(102)).isEqualTo("HIGH");
+        assertThat(descriptionFor(102)).isEqualTo("Legacy pending task");
+        assertThat(dateFor(102)).isEqualTo("2020-02-05");
+    }
+
     private String priorityFor(int id) {
         return jdbcTemplate.queryForObject(
                 "SELECT priority FROM task WHERE id = ?", String.class, id);
+    }
+
+    private Boolean completedFor(int id) {
+        return jdbcTemplate.queryForObject(
+                "SELECT completed FROM task WHERE id = ?", Boolean.class, id);
     }
 
     private String descriptionFor(int id) {

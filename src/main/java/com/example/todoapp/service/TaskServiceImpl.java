@@ -44,4 +44,9 @@ public class TaskServiceImpl implements TaskService {
         taskDao.updateTask(id, description, date, priority);
     }
 
+    @Override
+    public void updateCompletionStatus(int id, boolean completed) {
+        taskDao.updateCompletionStatus(id, completed);
+    }
+
 }

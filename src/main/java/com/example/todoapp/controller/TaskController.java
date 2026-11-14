@@ -53,6 +53,12 @@ public class TaskController {
         return "redirect:/todo/home";
     }
 
+    @PostMapping("/setCompletion/{id}")
+    public String setCompletion(@PathVariable int id, @RequestParam boolean completed) {
+        taskService.updateCompletionStatus(id, completed);
+        return "redirect:/todo/home";
+    }
+
     @GetMapping("/home")
     public String findAllTasks(Model model) {
         List<Task> taskList = taskService.findAllTasks();

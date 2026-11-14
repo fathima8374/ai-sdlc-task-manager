@@ -17,10 +17,16 @@ public class TaskPriorityMigration implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
         backfillNullPriorities();
+        backfillNullCompletionStatuses();
     }
 
     void backfillNullPriorities() {
         jdbcTemplate.update(
                 "UPDATE task SET priority = 'MEDIUM' WHERE priority IS NULL");
+    }
+
+    void backfillNullCompletionStatuses() {
+        jdbcTemplate.update(
+                "UPDATE task SET completed = FALSE WHERE completed IS NULL");
     }
 }
