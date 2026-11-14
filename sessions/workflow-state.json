@@ -1,0 +1,555 @@
+{
+  "stateKind": "actual-project-session",
+  "workflow": "Automated Documentation Sync",
+  "project": "Java 11 Spring Boot Todo application",
+  "sessionId": "capstone-session-ads-05",
+  "triggerMode": "manual-invocation-only",
+  "currentStage": "pull-request",
+  "currentTask": "ADS-PLAN-12",
+  "currentTaskStatus": "completed",
+  "stageSequence": [
+    "requirements",
+    "architecture",
+    "design-review",
+    "implementation-planning",
+    "implementation",
+    "implementation-review",
+    "verification",
+    "pull-request"
+  ],
+  "stageStatus": {
+    "requirements": {
+      "status": "approved",
+      "artifact": "docs/automated-documentation-sync/requirements.md",
+      "notes": "The human explicitly approved the current revision of the Requirements artifact after review."
+    },
+    "architecture": {
+      "status": "approved",
+      "artifact": "docs/automated-documentation-sync/architecture.md",
+      "notes": "The human explicitly reviewed and approved the current revision of the Architecture artifact."
+    },
+    "design-review": {
+      "status": "approved",
+      "artifact": "docs/automated-documentation-sync/design-review.md",
+      "notes": "The human explicitly approved the current Design Review artifact with the recommendation APPROVE WITH CONDITIONS."
+    },
+    "implementation-planning": {
+      "status": "approved",
+      "artifact": "docs/automated-documentation-sync/impl-plan.md",
+      "notes": "The human explicitly approved the implementation plan earlier in the project. No approver identity or timestamp was recorded in the available evidence."
+    },
+    "implementation": {
+      "status": "approved",
+      "artifact": "docs/automated-documentation-sync/impl-plan.md",
+      "notes": "The human explicitly approved the Implementation stage on 2026-11-13T23:36:42.336+05:30 for the completed and accepted implementation scope ADS-PLAN-01 through ADS-PLAN-10 and their recorded artifacts, as assessed against the approved implementation plan. This approval does not approve the Implementation Review stage, start or approve Verification, or mark ADS-PLAN-11 complete."
+    },
+    "implementation-review": {
+      "status": "approved",
+      "artifact": "docs/automated-documentation-sync/implementation-review.md",
+      "notes": "The human approved the current Implementation Review reassessment with conditions at 2026-11-13T23:45:22.492+05:30. IR-01 through IR-03 are resolved as recorded; IR-04 through IR-07 dispositions remain recorded separately. Conditions: preserve these items as limitations and do not claim technical correction; do not claim successful hook runtime validation or test execution without new evidence; carry applicable limitations into Verification and record actual results only if that stage is separately authorized. This approval does not start Verification or complete ADS-PLAN-11."
+    },
+    "verification": {
+      "status": "approved",
+      "artifact": "docs/automated-documentation-sync/verification.md",
+      "notes": "The human explicitly approved the Verification stage and ADS-PLAN-11 on 2026-11-14T12:05:23.414+05:30. Preserve the documented limitations: Java 11 execution remains unverified, Node.js hook validation remains pending, and other unresolved findings remain documented. This does not approve the Pull Request stage or mark ADS-PLAN-12 through ADS-PLAN-16 complete."
+    },
+    "pull-request": {
+      "status": "approved",
+      "artifact": "docs/automated-documentation-sync/pr.md",
+      "notes": "The human explicitly approved the Pull Request stage for preparation only on 2026-11-14T15:58:43.030+05:30. This approval does not authorize creation or submission of a GitHub Pull Request."
+    }
+  },
+  "taskStatus": {
+    "ADS-PLAN-01": {
+      "status": "completed",
+      "artifact": ".github/copilot-instructions.md",
+      "notes": "Artifact passed focused acceptance review. The user explicitly approved ADS-PLAN-01 and ADS-PLAN-02 on 2026-11-13."
+    },
+    "ADS-PLAN-02": {
+      "status": "completed",
+      "artifact": ".github/agents/orchestrator.agent.md",
+      "notes": "Artifact passed focused acceptance review. The user explicitly approved ADS-PLAN-01 and ADS-PLAN-02 on 2026-11-13."
+    },
+    "ADS-PLAN-04": {
+      "status": "completed",
+      "artifact": [
+        ".github/prompts/01-requirements.prompt.md",
+        ".github/prompts/02-architecture.prompt.md",
+        ".github/prompts/03-design-review.prompt.md",
+        ".github/prompts/04-implementation-planning.prompt.md",
+        ".github/prompts/05-implementation.prompt.md",
+        ".github/prompts/06-implementation-review.prompt.md",
+        ".github/prompts/07-verification.prompt.md",
+        ".github/prompts/08-pull-request.prompt.md"
+      ],
+      "notes": "All eight prompt artifacts exist and their stage correspondence and content satisfy the ADS-PLAN-04 acceptance criterion. On 2026-11-13, the user explicitly accepted the latest revisions to prompts 04 and 07, in addition to the revised prompt 06 prerequisite."
+    },
+    "ADS-PLAN-03": {
+      "status": "completed",
+      "artifact": ".github/agents/documentation-sync.agent.md",
+      "notes": "The human previously reviewed and approved the documentation-sync specialist agent."
+    },
+    "ADS-PLAN-05": {
+      "status": "completed",
+      "artifact": "sessions/workflow-state.json",
+      "notes": "The task was completed and explicitly accepted by the human reviewer."
+    },
+    "ADS-PLAN-06": {
+      "status": "completed",
+      "artifact": ".github/instructions/documentation-sync.instructions.md",
+      "notes": "The task was completed and explicitly accepted by the human reviewer."
+    },
+    "ADS-PLAN-07": {
+      "status": "completed",
+      "artifact": [
+        ".github/skills/evidence-contract/SKILL.md",
+        ".github/skills/drift-detection/SKILL.md"
+      ],
+      "notes": "The task was completed and explicitly approved by the human reviewer after reviewing and keeping both skill files."
+    },
+    "ADS-PLAN-08": {
+      "status": "completed",
+      "artifact": [
+        ".github/hooks/session-save.js",
+        ".github/agents/orchestrator.agent.md",
+        "sessions/README.md",
+        "sessions/workflow-state.json"
+      ],
+      "notes": "The task was completed and explicitly approved by the human reviewer. Node.js runtime validation remains pending because Node.js is unavailable."
+    },
+    "ADS-PLAN-09": {
+      "status": "completed",
+      "artifact": "docs/automated-documentation-sync/technical-reference.md",
+      "notes": "The human reviewed and accepted the technical reference."
+    },
+    "ADS-PLAN-10": {
+      "status": "completed",
+      "artifact": "docs/automated-documentation-sync/implementation-review.md",
+      "notes": "The human accepted the implementation review artifact after reviewing it. IR-01 is resolved by the accepted narrow ADS-PLAN-10 pre-stage-approval exception, limited to producing and submitting the review artifact. IR-02 is resolved by the accepted allowlist correction adding .github/instructions/** and .github/skills/** to both session allowlists; the lists match and existing allowed paths and protected-file restrictions were preserved. IR-03 is resolved because Requirements, Architecture, and Design Review now have persisted human approvals. The historical review recommendation remains NOT READY for Implementation-stage approval or progression to Verification and reflects the evidence at review time. Implementation-stage approval remains mandatory before Verification. IR-04 through IR-07 dispositions are recorded separately."
+    },
+    "ADS-PLAN-11": {
+      "status": "completed",
+      "artifact": "docs/automated-documentation-sync/verification.md",
+      "notes": "The verification artifact was completed and explicitly approved by the human on 2026-11-14T12:05:23.414+05:30. Maven/Surefire evidence records 42 tests with 0 failures, 0 errors, and 0 skipped under Java 25.0.1. Java 11 execution remains unverified; Node.js hook validation remains pending; other unresolved findings remain documented. This does not complete ADS-PLAN-12 through ADS-PLAN-16 or approve the Pull Request stage."
+    },
+    "ADS-PLAN-12": {
+      "status": "completed",
+      "artifact": "docs/automated-documentation-sync/pr.md",
+      "notes": "The PR description draft was created and retained for human review with all required sections and evidence. It is not approval of ADS-PLAN-12 or the Pull Request stage, and no GitHub Pull Request was submitted."
+    },
+    "ADS-PLAN-13": {
+      "status": "completed",
+      "artifact": [
+        ".github/agents/orchestrator.agent.md",
+        ".github/prompts/03-design-review.prompt.md",
+        ".github/prompts/04-implementation-planning.prompt.md",
+        ".github/prompts/05-implementation.prompt.md"
+      ],
+      "notes": "The human explicitly approved ADS-PLAN-13 and all four listed artifacts on 2026-11-14T14:51:34.969+05:30. ADS-PLAN-14 through ADS-PLAN-16 remain pending; the Pull Request stage remains pending and unapproved."
+    },
+    "ADS-PLAN-14": {
+      "status": "completed",
+      "artifact": [
+        ".github/agents/documentation-sync.agent.md",
+        ".github/skills/drift-detection/SKILL.md"
+      ],
+      "notes": "The human explicitly approved ADS-PLAN-14 and both listed artifacts on 2026-11-14T15:08:48.858+05:30. ADS-PLAN-15 and ADS-PLAN-16 remain pending; the Pull Request stage remains pending and unapproved."
+    },
+    "ADS-PLAN-15": {
+      "status": "completed",
+      "artifact": "docs/automated-documentation-sync/verification.md",
+      "notes": "The human explicitly approved ADS-PLAN-15 and the verification coverage amendment on 2026-11-14T15:23:58.228+05:30. ADS-PLAN-16 and the Pull Request stage remain pending and unapproved."
+    },
+    "ADS-PLAN-16": {
+      "status": "completed",
+      "artifact": [
+        ".github/agents/orchestrator.agent.md",
+        ".github/prompts/08-pull-request.prompt.md"
+      ],
+      "notes": "The human explicitly approved ADS-PLAN-16 and both listed artifacts on 2026-11-14T15:32:10.416+05:30. The Pull Request stage remains pending and unapproved; no GitHub PR was created or submitted."
+    }
+  },
+  "agentStatus": {
+    "requirements": {
+      "status": "completed",
+      "lastUpdated": null,
+      "source": "capstone documentation workflow",
+      "notes": "Agent completed documentation for Stage 1; this does not authorize approval."
+    },
+    "architecture": {
+      "status": "completed",
+      "lastUpdated": null,
+      "source": "capstone documentation workflow",
+      "notes": "Agent completed Stage 2 documentation; this does not authorize approval."
+    },
+    "design-review": {
+      "status": "completed",
+      "lastUpdated": null,
+      "source": "capstone documentation workflow",
+      "notes": "Agent completed the design review artifact; this does not authorize approval."
+    },
+    "implementation-planning": {
+      "status": "completed",
+      "lastUpdated": null,
+      "source": "capstone documentation workflow",
+      "notes": "Agent completed the implementation plan; this does not authorize approval."
+    },
+    "implementation": {
+      "status": "in_progress",
+      "lastUpdated": null,
+      "source": "capstone workflow implementation",
+      "notes": "ADS-PLAN-05 was implemented, but the implementation stage remains in progress because more implementation tasks remain."
+    },
+    "task:ADS-PLAN-05": {
+      "status": "completed",
+      "lastUpdated": null,
+      "source": "capstone workflow implementation",
+      "notes": "Agent output indicates task completion only; approval remains pending."
+    },
+    "implementation-review": {
+      "status": "pending",
+      "lastUpdated": null,
+      "source": null,
+      "notes": "The ADS-PLAN-10 review artifact is recorded; stage approval remains pending."
+    },
+    "verification": {
+      "status": "completed",
+      "lastUpdated": "2026-11-14T12:05:23.414+05:30",
+      "source": null,
+      "notes": "Verification report completed and explicitly approved by the human; the report's limitations remain documented."
+    },
+    "pull-request": {
+      "status": "pending",
+      "lastUpdated": null,
+      "source": null,
+      "notes": "No agent output recorded yet."
+    }
+  },
+  "humanApproval": {
+    "requirements": {
+      "status": "approved",
+      "humanDecision": "The human reviewed and explicitly approved the current revision of the Requirements artifact.",
+      "approver": "Human user",
+      "approvedAt": "2026-11-13T22:42:48.302+05:30",
+      "approvedStage": "requirements",
+      "approvedArtifact": "docs/automated-documentation-sync/requirements.md",
+      "notes": "Approval applies to the current revision of this exact artifact; no other stage is approved by this decision."
+    },
+    "architecture": {
+      "status": "approved",
+      "humanDecision": "The human reviewed and explicitly approved the current revision of the Architecture artifact.",
+      "approver": "Human user",
+      "approvedAt": "2026-11-13T22:52:11.893+05:30",
+      "approvedStage": "architecture",
+      "approvedArtifact": "docs/automated-documentation-sync/architecture.md",
+      "notes": "Approval applies to the current revision of this exact artifact; no other stage is approved by this decision."
+    },
+    "design-review": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved the current version of the Design Review artifact with the recommendation APPROVE WITH CONDITIONS.",
+      "approver": "Human user",
+      "approvedAt": "2026-11-13T23:15:31.655+05:30",
+      "approvedStage": "design-review",
+      "approvedArtifact": "docs/automated-documentation-sync/design-review.md",
+      "notes": "Human approval applies to the current version of the exact Design Review artifact and preserves its APPROVE WITH CONDITIONS recommendation."
+    },
+    "implementation-planning": {
+      "status": "approved",
+      "humanDecision": "The implementation plan was explicitly approved by the human earlier in the project.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedStage": "implementation-planning",
+      "approvedArtifact": "docs/automated-documentation-sync/impl-plan.md",
+      "notes": "Explicit human approval was given for the implementation plan; the approver identity and timestamp were not recorded in the available evidence."
+    },
+    "implementation": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved the Implementation stage based on the current Implementation-stage approval assessment. Scope: completed and accepted ADS-PLAN-01 through ADS-PLAN-10 and their recorded implementation artifacts, within the approved implementation plan.",
+      "approver": "Human user",
+      "approvedAt": "2026-11-13T23:36:42.336+05:30",
+      "approvedStage": "implementation",
+      "approvedArtifact": "docs/automated-documentation-sync/impl-plan.md",
+      "notes": "Approval covers only the completed and accepted ADS-PLAN-01 through ADS-PLAN-10 implementation scope and its recorded artifacts. ADS-PLAN-11 and subsequent work are excluded. This does not approve Implementation Review or Verification, and does not authorize or mark ADS-PLAN-11 complete."
+    },
+    "implementation-review": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved the current Implementation Review reassessment with conditions.",
+      "approver": "Human user",
+      "approvedAt": "2026-11-13T23:45:22.492+05:30",
+      "approvedStage": "implementation-review",
+      "approvedArtifact": "docs/automated-documentation-sync/implementation-review.md",
+      "notes": "The human explicitly approved the current reassessment with conditions. Conditions: keep the IR-04 filename inconsistency, pending IR-05 hook runtime validation, deferred IR-06 test evidence, and IR-07 README drift visible as limitations and do not claim they were technically corrected; do not claim successful Node.js hook validation or test execution without new execution evidence; carry applicable limitations into Verification and record actual checks and results only if Verification is separately authorized. This approval does not start Verification or mark ADS-PLAN-11 complete. The recorded human dispositions for IR-04 through IR-07 remain in force."
+    },
+    "verification": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved the Verification stage and ADS-PLAN-11.",
+      "approver": "Human user",
+      "approvedAt": "2026-11-14T12:05:23.414+05:30",
+      "approvedStage": "verification",
+      "approvedArtifact": "docs/automated-documentation-sync/verification.md",
+      "notes": "Approval covers the Verification report and ADS-PLAN-11 only. Preserve limitations: Java 11 execution is unverified, Node.js hook validation remains pending, and other unresolved findings remain documented. This does not approve the Pull Request stage or complete ADS-PLAN-12 through ADS-PLAN-16."
+    },
+    "pull-request": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved the Pull Request stage for preparation only.",
+      "approver": "Human",
+      "approvedAt": "2026-11-14T15:58:43.030+05:30",
+      "approvedStage": "pull-request",
+      "approvedArtifact": "docs/automated-documentation-sync/pr.md",
+      "notes": "Approval is for Pull Request stage preparation using the exact approved draft only. It does not authorize creation, submission, or merging of a GitHub Pull Request. Separate explicit human submission authorization is still required."
+    }
+  },
+  "taskApprovals": {
+    "ADS-PLAN-01": {
+      "status": "approved",
+      "humanDecision": "The user explicitly approved ADS-PLAN-01 and ADS-PLAN-02 on 2026-11-13, following their focused acceptance review.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedTask": "ADS-PLAN-01",
+      "approvedArtifact": ".github/copilot-instructions.md",
+      "notes": "Explicit approval followed the focused acceptance review. Approver identity and approval timestamp were not recorded."
+    },
+    "ADS-PLAN-02": {
+      "status": "approved",
+      "humanDecision": "The user explicitly approved ADS-PLAN-01 and ADS-PLAN-02 on 2026-11-13, following their focused acceptance review.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedTask": "ADS-PLAN-02",
+      "approvedArtifact": ".github/agents/orchestrator.agent.md",
+      "notes": "Explicit approval followed the focused acceptance review. Approver identity and approval timestamp were not recorded."
+    },
+    "ADS-PLAN-04": {
+      "status": "approved",
+      "humanDecision": "The user explicitly approved all eight ADS-PLAN-04 prompt files and clicked Keep All for the latest revisions to prompts 04 and 07 on 2026-11-13, also accepting the revised prompt 06 prerequisite.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedTask": "ADS-PLAN-04",
+      "approvedArtifact": [
+        ".github/prompts/01-requirements.prompt.md",
+        ".github/prompts/02-architecture.prompt.md",
+        ".github/prompts/03-design-review.prompt.md",
+        ".github/prompts/04-implementation-planning.prompt.md",
+        ".github/prompts/05-implementation.prompt.md",
+        ".github/prompts/06-implementation-review.prompt.md",
+        ".github/prompts/07-verification.prompt.md",
+        ".github/prompts/08-pull-request.prompt.md"
+      ],
+      "notes": "The user approved all eight prompt artifacts, clicked Keep All for the latest revisions to prompts 04 and 07 on 2026-11-13, and accepted the revised prompt 06 prerequisite. No approver identity or approval timestamp was recorded."
+    },
+    "ADS-PLAN-03": {
+      "status": "approved",
+      "humanDecision": "Human reviewed and approved the documentation-sync specialist agent.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedTask": "ADS-PLAN-03",
+      "approvedArtifact": ".github/agents/documentation-sync.agent.md",
+      "notes": "Approval was previously given; approver identity and approval timestamp are unavailable."
+    },
+    "ADS-PLAN-05": {
+      "status": "approved",
+      "humanDecision": "Human accepted the final ADS-PLAN-05 state-tracking updates.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedTask": "ADS-PLAN-05",
+      "approvedArtifact": "sessions/workflow-state.json",
+      "notes": "Explicit human approval was recorded for the reviewed ADS-PLAN-05 changes."
+    },
+    "ADS-PLAN-06": {
+      "status": "approved",
+      "humanDecision": "Human reviewed and accepted the ADS-PLAN-06 shared instruction file.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedTask": "ADS-PLAN-06",
+      "approvedArtifact": ".github/instructions/documentation-sync.instructions.md",
+      "notes": "Explicit human approval was recorded for the accepted ADS-PLAN-06 implementation."
+    },
+    "ADS-PLAN-07": {
+      "status": "approved",
+      "humanDecision": "Human explicitly approved ADS-PLAN-07 after reviewing and keeping both reusable skill files.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedTask": "ADS-PLAN-07",
+      "approvedArtifact": [
+        ".github/skills/evidence-contract/SKILL.md",
+        ".github/skills/drift-detection/SKILL.md"
+      ],
+      "notes": "Approval covers both listed skill artifacts; no approver identity or approval timestamp was recorded."
+    },
+    "ADS-PLAN-08": {
+      "status": "approved",
+      "humanDecision": "Human approved ADS-PLAN-08: Optional session-save hook.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedTask": "ADS-PLAN-08",
+      "approvedArtifact": [
+        ".github/hooks/session-save.js",
+        ".github/agents/orchestrator.agent.md",
+        "sessions/README.md",
+        "sessions/workflow-state.json"
+      ],
+      "notes": "Approval recorded without an approver identity or timestamp. Node.js runtime validation remains pending because Node.js is unavailable."
+    },
+    "ADS-PLAN-09": {
+      "status": "approved",
+      "humanDecision": "Human reviewed and accepted the ADS-PLAN-09 technical reference.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedTask": "ADS-PLAN-09",
+      "approvedArtifact": "docs/automated-documentation-sync/technical-reference.md",
+      "notes": "Human acceptance recorded; approver identity and approval timestamp were not available."
+    },
+    "ADS-PLAN-10": {
+      "status": "approved",
+      "humanDecision": "The human accepted the ADS-PLAN-10 implementation review artifact after reviewing it.",
+      "approver": null,
+      "approvedAt": null,
+      "approvedTask": "ADS-PLAN-10",
+      "approvedArtifact": "docs/automated-documentation-sync/implementation-review.md",
+      "notes": "Approval covers acceptance of the review artifact only. IR-01 is resolved by the human-accepted narrow ADS-PLAN-10 pre-stage-approval exception, limited to producing and submitting the implementation review artifact. IR-02 is resolved by the human-accepted allowlist correction adding .github/instructions/** and .github/skills/** to both session allowlists; the lists match and existing allowed paths and protected-file restrictions were preserved. IR-03 is resolved because Requirements, Architecture, and Design Review now have persisted human approvals. These dispositions do not approve or complete the Implementation or Implementation Review stage, or authorize Verification. Implementation-stage approval remains mandatory before Verification. IR-04 through IR-07 dispositions are recorded separately."
+    },
+    "ADS-PLAN-11": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved ADS-PLAN-11 and the Verification stage.",
+      "approver": "Human user",
+      "approvedAt": "2026-11-14T12:05:23.414+05:30",
+      "approvedTask": "ADS-PLAN-11",
+      "approvedArtifact": "docs/automated-documentation-sync/verification.md",
+      "notes": "Approval preserves the report's limitations: Java 11 test execution is unverified, Node.js hook validation remains pending, and other unresolved findings remain documented. This does not approve ADS-PLAN-12 through ADS-PLAN-16 or the Pull Request stage."
+    },
+    "ADS-PLAN-12": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved ADS-PLAN-12 and the artifact docs/automated-documentation-sync/pr.md.",
+      "approver": "Human user",
+      "approvedAt": "2026-11-14T12:13:59.084+05:30",
+      "approvedTask": "ADS-PLAN-12",
+      "approvedArtifact": "docs/automated-documentation-sync/pr.md",
+      "notes": "Earlier approval was for the PR description draft only. The updated revision was separately approved by the human on 2026-11-14T15:53:01.880+05:30, recorded under `updated-pr-draft`. Neither approval approves the Pull Request stage or authorizes PR submission."
+    },
+    "updated-pr-draft": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved the updated revision of the PR draft.",
+      "approver": "Human",
+      "approvedAt": "2026-11-14T15:53:01.880+05:30",
+      "approvedTask": "ADS-PLAN-12",
+      "approvedArtifact": "docs/automated-documentation-sync/pr.md",
+      "notes": "Approval applies to the updated PR draft revision only. It preserves the earlier ADS-PLAN-12 approval history and does not approve the Pull Request stage or authorize PR submission."
+    },
+    "ADS-PLAN-13": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved ADS-PLAN-13 and its four reviewed artifacts.",
+      "approver": "Human user",
+      "approvedAt": "2026-11-14T14:51:34.969+05:30",
+      "approvedTask": "ADS-PLAN-13",
+      "approvedArtifact": [
+        ".github/agents/orchestrator.agent.md",
+        ".github/prompts/03-design-review.prompt.md",
+        ".github/prompts/04-implementation-planning.prompt.md",
+        ".github/prompts/05-implementation.prompt.md"
+      ],
+      "notes": "Approval applies only to ADS-PLAN-13 and the four listed artifacts. Previous approvals and conditions remain unchanged. ADS-PLAN-14 through ADS-PLAN-16 and the Pull Request stage remain pending; no GitHub PR was submitted."
+    },
+    "ADS-PLAN-14": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved ADS-PLAN-14 and its two reviewed artifacts.",
+      "approver": "Human user",
+      "approvedAt": "2026-11-14T15:08:48.858+05:30",
+      "approvedTask": "ADS-PLAN-14",
+      "approvedArtifact": [
+        ".github/agents/documentation-sync.agent.md",
+        ".github/skills/drift-detection/SKILL.md"
+      ],
+      "notes": "Approval applies only to ADS-PLAN-14 and the two listed artifacts. Previous approval records and conditions remain unchanged. ADS-PLAN-15 and ADS-PLAN-16 remain pending; the Pull Request stage remains pending and unapproved; no GitHub PR was submitted."
+    },
+    "ADS-PLAN-15": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved ADS-PLAN-15.",
+      "approver": "Human",
+      "approvedAt": "2026-11-14T15:23:58.228+05:30",
+      "approvedTask": "ADS-PLAN-15",
+      "approvedArtifact": "docs/automated-documentation-sync/verification.md",
+      "notes": "Approval applies to the ADS-PLAN-15 coverage-policy amendment in this exact artifact. Previous approvals and conditions remain unchanged. ADS-PLAN-16 and the Pull Request stage remain pending and unapproved."
+    },
+    "ADS-PLAN-16": {
+      "status": "approved",
+      "humanDecision": "The human explicitly approved ADS-PLAN-16.",
+      "approver": "Human",
+      "approvedAt": "2026-11-14T15:32:10.416+05:30",
+      "approvedTask": "ADS-PLAN-16",
+      "approvedArtifact": [
+        ".github/agents/orchestrator.agent.md",
+        ".github/prompts/08-pull-request.prompt.md"
+      ],
+      "notes": "Approval applies to ADS-PLAN-16 and the two listed artifacts. Previous approvals, conditions, and decisions remain unchanged. The Pull Request stage remains pending and unapproved; no GitHub PR was created or submitted."
+    }
+  },
+  "artifacts": {
+    "actual": {
+      "requirements": "docs/automated-documentation-sync/requirements.md",
+      "architecture": "docs/automated-documentation-sync/architecture.md",
+      "design-review": "docs/automated-documentation-sync/design-review.md",
+      "implementation-planning": "docs/automated-documentation-sync/impl-plan.md",
+      "instructions": ".github/copilot-instructions.md",
+      "orchestrator": ".github/agents/orchestrator.agent.md",
+      "documentation-sync-agent": ".github/agents/documentation-sync.agent.md",
+      "technical-reference": "docs/automated-documentation-sync/technical-reference.md",
+      "prompts": {
+        "01-requirements": ".github/prompts/01-requirements.prompt.md",
+        "02-architecture": ".github/prompts/02-architecture.prompt.md",
+        "03-design-review": ".github/prompts/03-design-review.prompt.md",
+        "04-implementation-planning": ".github/prompts/04-implementation-planning.prompt.md",
+        "05-implementation": ".github/prompts/05-implementation.prompt.md",
+        "06-implementation-review": ".github/prompts/06-implementation-review.prompt.md",
+        "07-verification": ".github/prompts/07-verification.prompt.md",
+        "08-pull-request": ".github/prompts/08-pull-request.prompt.md"
+      },
+      "session-readme": "sessions/README.md",
+      "session-state": "sessions/workflow-state.json",
+      "implementation-review": "docs/automated-documentation-sync/implementation-review.md",
+      "verification": "docs/automated-documentation-sync/verification.md",
+      "pull-request-draft": "docs/automated-documentation-sync/pr.md"
+    },
+    "planned": {
+      "pull-request": "docs/automated-documentation-sync/pr.md"
+    }
+  },
+  "pendingDecisions": [
+    "IR-01 resolved: Human accepted the narrow ADS-PLAN-10 pre-stage-approval exception, limited to producing and submitting the implementation review artifact. IR-02 resolved: Human accepted the allowlist correction adding .github/instructions/** and .github/skills/** to both session allowlists; the lists match and existing allowed paths and protected-file restrictions were preserved. IR-03 resolved: Requirements, Architecture, and Design Review have persisted human approvals. Implementation-stage approval was recorded on 2026-11-13T23:36:42.336+05:30; Implementation Review was approved with conditions on 2026-11-13T23:45:22.492+05:30. Verification and ADS-PLAN-11 were completed and approved on 2026-11-14T12:05:23.414+05:30; Java 11 execution remains unverified, Node.js hook validation remains pending, and other limitations remain documented. IR-04 through IR-07 decisions remain recorded and must be applied as documented.",
+    "DR-ADS-08 decision: ACCEPTED — Historical sequence deviation. Decision-maker: Human project owner. Decided at 2026-11-13T23:08:18.916+05:30. Implementation Planning was approved and Implementation began while Design Review was pending. This is present-day acceptance of the historical deviation, not retroactive Design Review approval. It does not approve Design Review, Implementation, or Implementation Review, and does not authorize Verification or ADS-PLAN-11.",
+    "IR-04 decision: Human accepts .github/prompts/08-pull-request.prompt.md as the intended filename; the implementation plan contains a filename inconsistency, and the prompt must not be renamed.",
+    "IR-05 decision: Human accepts pending Node.js runtime validation of the optional session-save hook as a documented limitation. No successful runtime validation is claimed.",
+    "IR-06 decision: Human deferred test execution evidence to Verification. The verification report subsequently records Maven/Surefire results (42 tests, 0 failures, 0 errors, 0 skipped) under Java 25.0.1; no Java 11 execution is claimed.",
+    "IR-07 decision: Human accepts the README Add-route discrepancy as documented historical drift. The protected README must not be modified.",
+    "ADS-PLAN-12 PR description draft was explicitly approved on 2026-11-14T12:13:59.084+05:30. Pull Request stage approval and submission remain pending and require separate human approval."
+  ],
+  "unresolvedQuestions": [],
+  "blockers": [
+    "The Pull Request stage remains pending; Verification approval does not approve PR preparation or submission."
+  ],
+  "protectedFiles": [
+    "docs/requirements.md",
+    "docs/architecture.md",
+    "docs/design-review.md",
+    "docs/impl-plan.md",
+    "src/main/java/**",
+    "src/test/java/**",
+    "src/main/resources/**",
+    "pom.xml",
+    ".github/agents/requirements-generator.agent.md",
+    "reference/colleague-capstone/**"
+  ],
+  "allowedCapstonePaths": [
+    "docs/automated-documentation-sync/**",
+    ".github/copilot-instructions.md",
+    ".github/agents/orchestrator.agent.md",
+    ".github/agents/documentation-sync.agent.md",
+    ".github/instructions/**",
+    ".github/skills/**",
+    ".github/hooks/**",
+    ".github/prompts/**",
+    "sessions/**"
+  ],
+  "lastUpdated": "2026-11-14T15:58:43.030+05:30",
+  "approvalRequired": true,
+  "agentApprovalNotAllowed": true,
+  "notes": "Agent-generated status may track implementation progress, but it never authorizes human approval. Human approval requires an explicit record with approver, timestamp, and stage or task reference if the evidence exists."
+}
