@@ -2,24 +2,24 @@
 
 **Project:** Java 11 Spring Boot Todo application  
 **Document:** Requirements  
-**Status:** Draft for human review
+**Status:** Prior baseline approved; 2026-11-16 completion amendment awaiting human acceptance
 
 ## 1. Goal
 
 Demonstrate an Agentic SDLC workflow that generates and synchronizes accurate technical documentation from the existing Java 11 Spring Boot Todo repository. This is a documentation use case, not a request to implement another Todo feature.
 
-The supplied assignment information states that no Jira user story was assigned; under that supplied scope, a Jira story is not required.
+No external story URL or document was supplied with the current request. The human's pasted eight-stage exercise is the actual intake source; external-story support is required when a source is supplied, but an external story must not be fabricated.
 
 ## 2. Assignment information provided for this capstone
 
-This baseline reflects assignment information supplied by the user in the capstone assignment brief/conversation. The authoritative full rubric was not located in the repository; statements below are not represented as an independent verification of unavailable rubric text.
+This baseline reflects the assignment brief supplied in chat. The human supplied the eight-stage exercise again on 2026-11-16 and requested implementation of all eight steps. That supplied text is the exercise source for this amendment, not an independently retrieved Jira/Confluence/Word story.
 
 - The use case is **Agentic SDLC — Automated Documentation Sync**.
 - The workflow covers eight stages: Requirements, Architecture, Design Review, Implementation Planning, Implementation, Review, Verification, and Pull Request.
 - Technical documentation must describe the existing application accurately and be grounded in repository evidence.
 - The Java source, tests, `pom.xml`, application configuration, and relevant repository files must be inspected before documenting technical facts.
 - Human approval is required before implementation and before the final PR.
-- The supplied assignment information states that no Jira user story was assigned; this is user-provided context, not an independently verified repository fact.
+- No external story was provided in the current request. Record the source and actual clarification answers rather than inventing a Jira assignment.
 
 The eight-stage Copilot SDLC workflow is manually invoked by a human, consistent with `.github/copilot-instructions.md`. No automatic repository-change trigger is claimed as implemented. Any separate automatic documentation-sync trigger remains unresolved and is outside this requirements baseline unless separately approved.
 
@@ -55,7 +55,7 @@ Known README drift must remain visible for human review: the root `README.md:24`
 
 - Implementing a new Todo feature or changing application runtime behavior as part of this use case.
 - Silently overwriting existing approved documents or changing existing decisions.
-- Requiring a Jira story.
+- Fabricating or requiring credentials for an external story that has not been supplied.
 
 ### Stage outputs
 
@@ -88,6 +88,37 @@ This mapping identifies expected outputs; it does not itself record human approv
 | ADS-008 | Implementation review findings are recorded separately from design review, and verification records commands or procedures, actual outcomes, and known gaps. |
 | ADS-009 | The final PR description includes **Summary**, **Changes Made**, **Test Evidence**, **Known Limitations**, and **Reviewer Checklist**. |
 | ADS-010 | The documentation states its review context or repository revision so that readers can assess whether its evidence may have become stale. |
+| ADS-011 | Requirements intake records the actual chat, Jira, Confluence, or Word source, a user story, actual clarification responses, and unresolved assumptions. Approved requirements are committed only when authorized. |
+| ADS-012 | Architecture includes component and data-flow diagrams and technology choices. |
+| ADS-013 | Implementation review explicitly assesses Correctness, Security, Error Handling, Test Coverage, Code Clarity, DRY Principle, and Dependency Safety. |
+| ADS-014 | Repeatable workflow tests cover happy paths, missing/empty evidence, malformed state, missing fields, path escapes, stale approval hashes, denied/pending approvals, claim classification, and repeatability. |
+| ADS-015 | Isolated hook tests execute valid, invalid, append, metadata-only, failure, and state-preservation scenarios without writing real session logs. |
+| ADS-016 | Verification CI runs workflow, document, hook, and existing application tests. It never writes documentation or grants approvals. |
+| ADS-017 | Delivery includes a changelog, actual file inventory, real console output or CI links, and the actual existing/new PR URL. No duplicate PR or unauthorized merge is allowed. |
+| ADS-018 | Historical approvals remain historical; amended artifacts require current human acceptance before ready-to-merge status. |
+
+## 5A. Current user story, functional and non-functional requirements
+
+> As a Todo application maintainer, I want Copilot to execute a traceable eight-stage documentation-sync workflow, report source/documentation drift, verify the resulting artifacts, and deliver a reviewable PR, so that technical documentation is reliable without changing application behavior.
+
+| ID | Type | Requirement and acceptance measure |
+|---|---|---|
+| FR-ADS-01 | Functional | Read the supplied source and record source identity and clarification decisions; never claim an unavailable external source was read. |
+| FR-ADS-02 | Functional | Produce all eight stage artifacts, a cited technical reference, and a changelog; structural validation must find them. |
+| FR-ADS-03 | Functional | Compare claims with source and return one of the four defined classifications; known README route drift remains visible. |
+| FR-ADS-04 | Functional | Block readiness on missing artifacts, pending/rejected decisions, or a changed approved-artifact hash. |
+| FR-ADS-05 | Functional | Reuse the branch's existing PR, or create one only when authorized; record real delivery state. |
+| NFR-ADS-01 | Non-functional | Resolve evidence paths inside the repository and reject traversal/reparse escapes, empty evidence, and malformed state with explicit failures. |
+| NFR-ADS-02 | Non-functional | Checks are read-only and repeatable; fixtures must not mutate actual application or approval records. |
+| NFR-ADS-03 | Non-functional | No application behavior/dependency changes; audit output is limited to completion metadata and excludes raw prompts/tokens. |
+| NFR-ADS-04 | Non-functional | Reuse PowerShell, Maven, and Node built-in testing; record exact runtime versions and nonzero outcomes. |
+| NFR-ADS-05 | Non-functional | Preserve historical decisions, but do not use them to approve unseen amendments or bypass human merge review. |
+
+## 5B. Source and clarification record - 2026-11-16
+
+The source is the exercise pasted by the human in this conversation. A previous question offered a repository-specific documentation-sync guide, workflow changes, or task-priority work; the human was unavailable and no answer was fabricated. The human subsequently clarified: "not partially implement all the eight steps completely and please do change accordingly."
+
+This authorizes completing the documentation-sync implementation and updating its delivery artifacts, not inventing stakeholder approval of the resulting revision. Defaults retained from repository context are documentation-only scope, manual generation, existing Todo evidence, and protected application files. No Jira/Confluence URL or Word path is available; importing a particular external story remains conditional on that source being supplied. There is no unresolved technical design choice blocking this implementation. Acceptance of the new artifacts and merge remain human decisions.
 
 ## 6. Human approval checkpoints
 
@@ -111,15 +142,15 @@ Passing tests or generated documentation do not constitute human approval.
 ### Assumptions
 
 - The existing Todo repository is the application to document, and documentation accuracy—not new application functionality—is the goal.
-- The supplied assignment information can be used as the working scope; any additional rubric requirements remain unverified unless the authoritative rubric is made available.
+- The eight-stage exercise supplied on 2026-11-16 is the working rubric; requirements outside that text are not inferred.
 
 ### Unresolved decisions
 
 - Is a separate automatic documentation-sync trigger required by the authoritative rubric? If so, which event should initiate it? No such trigger is assumed in this scope.
 - Which existing documentation files, if any, must be updated, rather than producing a separate technical reference?
-- Does the authoritative rubric specify further requirements for Copilot agents, prompts, instructions, skills, hooks, verification, or PR artifacts?
+- No further technical decision is required to implement the supplied exercise. Any additional external rubric remains out of scope until supplied.
 
 ## 9. Approval record
 
-**Approval status:** Pending human review.  
-Implementation and changes to existing documentation are not authorized until the applicable approval checkpoints are met.
+**Approval history:** The earlier baseline's explicit approval is preserved in workflow state.
+**Current amendment:** The human requested implementation on 2026-11-16; acceptance of this changed requirements artifact is pending. Implementation authorization is not acceptance of unseen outputs.
