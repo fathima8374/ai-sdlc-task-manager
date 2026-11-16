@@ -4,6 +4,8 @@
 **Scope:** ADS-PLAN-11; repository evidence for the Todo technical reference and documented claims  
 **Output:** `docs/automated-documentation-sync/verification.md`
 
+> Sections 1-5 preserve the original verification and its historical limitations. The completion run below supersedes current tool-availability, committed-state, and hook-execution statements; it does not rewrite the original run or human decisions.
+
 > **ADS-PLAN-15 amendment (2026-11-14):** The coverage table in Section 3A makes explicit which route, dependency, configuration, and test checks were recorded in the original ADS-PLAN-11 verification and how they were checked. This amendment organizes existing evidence; it does not rerun checks or add new execution results. Original commands, outcomes, and limitations below are preserved.
 
 ## 1. Authorization and workflow status
@@ -100,3 +102,62 @@ The successful test run verifies that the Maven test suite completed in this env
 The README route discrepancy remains unchanged. No application source, test, README, product documentation, prompt, instruction, agent, implementation review, or workflow-state file was edited as part of this report. Maven generated build output under the ignored `target/` directory as a test-run side effect; the only authored capstone artifact from this task is this verification report.
 
 The original Verification results were evidence for human review, not approval by themselves. Verification and ADS-PLAN-11 were subsequently approved by the human at the timestamp recorded above. This amendment records no new stage or task approval and does not authorize PR submission.
+
+## 6. Completion verification - 2026-11-16
+
+The human requested completion of all eight steps at `2026-11-16T16:16:08.243+05:30`. This authorizes implementation/evidence gathering, not approval of these results. Baseline before the completion commit: `ba08654c379168dd743ef9aa8a0054bcea56e708`. Only capstone infrastructure, documents and session records are changed.
+
+### Environment and commands
+
+| Item | Actual observation |
+|---|---|
+| PowerShell | Windows PowerShell `5.1.26100.9711`. |
+| Java / Maven | Java `25.0.1`, Maven `3.9.12`, Windows 11 x64. |
+| Node | `v22.23.5`; restored from the official Node `latest-v22.x` Windows x64 archive after Node was absent, with SHA-256 checked against the official `SHASUMS256.txt`. Portable runtime is in session storage, not committed to the repository or installed system-wide. |
+| `mvn -B test` | Exit 0; Maven reports 42 tests, 0 failures, 0 errors, 0 skipped. |
+| `mvn -B clean test` | Exit 0; rerun because an old ignored `TaskCompletionIntegrationTest` report made a naive XML-directory count 46. Clean execution reports 42; fresh XML totals also equal 42. The unrelated task-completion branch is not part of this PR. |
+| `node --test .github\tests\session-save.test.js` | Exit 0; 8 tests, 8 passed, 0 failed, 0 skipped. Real hook subprocesses run against isolated copies, not the live `sessions` directory. |
+| `mvn -B dependency:tree '-Dincludes=org.springframework:spring-webmvc,org.springframework:spring-web,org.springframework:spring-core,com.h2database:h2'` | Exit 0; resolves Spring Framework `5.2.6.RELEASE`, H2 `1.4.200`, Boot `2.3.0.RELEASE`. Advisory applicability is documented in implementation review; no comprehensive vulnerability scan is claimed. |
+| `git diff --name-only origin/master -- src pom.xml docs/requirements.md docs/architecture.md docs/design-review.md docs/impl-plan.md README.md` | Empty output: no protected application/product changes relative to the PR base. |
+| GitHub PR read | PR #1 exists, open, on `capstone/automated-documentation-sync` targeting `master`; not merged. This contradicts old "not submitted" prose, which is now corrected. |
+| Requirements commit | `eb6bdce` commits only the revised requirements artifact, fulfilling the Step 1 commit output without claiming human acceptance of its new contents. |
+
+Actual application console summary:
+
+```text
+Tests run: 42, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+Fresh Surefire XML total: 42
+```
+
+Actual Node summary:
+
+```text
+1..8
+# tests 8
+# pass 8
+# fail 0
+# skipped 0
+```
+
+The eight application suites are unchanged: controller baseline (10), REST baseline (8), priority integration (12), template rendering (3), persistence (5), priority enum (1), migration (2), and context-load (1).
+
+### Document and workflow coverage
+
+| Concern | Evidence method / expected interpretation |
+|---|---|
+| Requirements and story source | Actual pasted exercise and follow-up request recorded; no unavailable external story or invented clarification answer claimed. |
+| Stage completeness | Eight stage artifacts, eight prompt/specialist mappings, two existing skills, changelog, and exact PR file inventory are checked. |
+| Source-backed content | Compare declared Java/Boot versions, priority enum, route mapping, citations and four claim classifications with repository evidence; known README route drift remains visible. |
+| Missing evidence and Not Found | Workflow fixtures must explicitly reject missing/empty files and absent required state fields rather than generate success-shaped content. |
+| Approval boundaries | Positive and negative fixtures cover pending/denied approvals, wrong artifacts, changed hashes and current-amendment acceptance; technical validation is distinct from readiness. |
+| Hook behavior | Eight executed subprocess cases cover metadata whitelist, empty input, field types, malformed/private input, non-object roots, append behavior, authoritative-state preservation, and filesystem failure. |
+| Runtime scope | Hook subprocess behavior is exercised; actual IDE hook registration remains harness-specific. Application deployment/port and external source APIs are not claimed verified. |
+
+### CI and acceptance boundary
+
+`.github/workflows/documentation-sync.yml` runs workflow/document/hook/application verification on Windows with Java 11 and Node 22. Actions are pinned to immutable SHAs observed from official `v4` tags; permissions are read-only and checkout credentials are not persisted. CI never generates documents or grants approvals.
+
+[Actual workflow runs](https://github.com/fathima8374/ai-sdlc-task-manager/actions/workflows/documentation-sync.yml) are the source for hosted execution status. Configuration alone is not a successful CI result, and local Java 25 results must not be described as Java 11 execution.
+
+Historical approvals remain intact. Acceptance of the completion amendment is pending; readiness must be blocked until actual current decisions are recorded. No automatic merge is authorized by technical success.

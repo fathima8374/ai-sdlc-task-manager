@@ -1,15 +1,15 @@
 # Todo Application Technical Reference
 
 **Purpose:** Evidence-backed overview of the existing Todo application for the Automated Documentation Sync capstone.  
-**Inspection date:** 2026-11-13  
-**Repository revision:** `5129c3b84f0c2794e394b8e86c316d4c5bc83024` (`HEAD` at inspection)  
-**Status:** Initial source-backed reference for human review
+**Inspection date:** 2026-11-16 (completion refresh)
+**Repository revision:** `ba08654c379168dd743ef9aa8a0054bcea56e708` (base before completion commit)
+**Status:** Source-backed reference; refreshed revision awaiting human acceptance
 
 ## 1. Scope and evidence rules
 
 This reference describes implementation claims supported by the repository files cited below. Java source, tests, Maven metadata, and runtime resources are primary evidence for current implementation. Existing documentation is treated as a claim to compare, not as proof of application behavior. Approved Automated Documentation Sync documents establish workflow decisions and boundaries, not undocumented application behavior.
 
-The Git revision above identifies the checked-out commit, but it does not capture the complete inspection context: `git status --short` showed the capstone directories and files, including `docs/automated-documentation-sync/`, `.github/`, `sessions/`, and `reference/`, as untracked. Those working-tree files are not represented by that commit alone.
+The Git revision identifies the baseline before the completion amendment. The framework is now committed in `1dd7107` and `ba08654`; current documentation/workflow amendments are working-tree changes until their completion commit. The protected application source is unchanged by this amendment. The original 2026-11-13 inspection's untracked-file caveat is historical, not current repository state.
 
 ### Claim classifications
 
@@ -26,7 +26,7 @@ Test source establishes what a test asserts; it does not prove that the test was
 | UI and REST controller base mappings are `/todo` and `/api/todo`. | Verified | `src/main/java/com/example/todoapp/controller/TaskController.java:14-16`; `src/main/java/com/example/todoapp/controller/TaskControllerREST.java:17-19`. |
 | `Task.priority` is persisted as an enum string. | Verified | `src/main/java/com/example/todoapp/domain/Task.java:24-26`. |
 | The root README's add route `/api/todo/add/{id}` matches the REST implementation. | Contradicted by evidence | `README.md:24` conflicts with `@RequestMapping("/api/todo")` and `@PostMapping("/add")` in `src/main/java/com/example/todoapp/controller/TaskControllerREST.java:18,35`. |
-| The application's test suite passed. | Unverified | Test sources exist, but no test execution result is recorded in this reference. |
+| The application's test suite passed in the completion run. | Verified | `verification.md`, 2026-11-16 completion evidence: Maven reports 42 tests with zero failures/errors/skips on Java 25.0.1. This is not evidence of local Java 11 execution. |
 | The misspelled `spring.datasource.continue-on-erorr` property changes runtime behavior. | Unresolved | The key is present in `src/main/resources/application.properties:8`; this inspection did not validate whether it is recognized or effective. |
 
 ## 2. Application overview
@@ -128,7 +128,7 @@ The repository contains test-source evidence in `src/test/java/com/example/todoa
 | `src/test/java/com/example/todoapp/dao/TaskPersistenceTest.java` | Priority persistence and updates, CRUD compatibility, and preservation of priority in the three-argument update path. |
 | `src/test/java/com/example/todoapp/migration/TaskPriorityMigrationTest.java` | Seed priority and repeatable null-priority backfill while preserving valid values. |
 
-**Execution status:** This reference records no test command or test-run result. It does not claim that tests passed. Test execution and results must be recorded separately from this source-coverage inventory.
+**Execution status:** The inventory above describes source coverage. Actual 2026-11-16 execution evidence is maintained separately in `verification.md`; it records the command, runtime, and Maven result. Do not equate test-source assertions with an execution result.
 
 ## 10. Assumptions and unresolved questions
 
@@ -141,7 +141,7 @@ The repository contains test-source evidence in `src/test/java/com/example/todoa
 
 - Whether the configured `spring.datasource.continue-on-erorr` key is recognized or has an effect; runtime behavior has not been validated here.
 - The runtime port and deployment context path outside the checked-in application configuration.
-- Whether every behavior in source has test coverage, and whether the listed tests pass in the current environment.
+- Whether every behavior in source has test coverage; a passing suite does not establish exhaustive coverage.
 - Whether the root README's route discrepancy should be corrected; that decision requires human review.
 
 ## 11. Documentation drift
@@ -160,6 +160,6 @@ No other documentation statements are classified as implementation facts solely 
 ## 12. Review limitations
 
 - This is a repository inspection, not a runtime verification report.
-- Test methods establish assertions present in source only; no test execution result is recorded here.
-- The checked-out commit SHA does not include the untracked capstone artifacts visible in `git status --short`; this reference itself is part of that working-tree context until committed.
+- Test methods establish source assertions; execution evidence is linked separately in the verification report.
+- The baseline commit does not include this completion amendment until the delivery commit is made.
 - Human review is required before accepting this technical reference as an approved artifact or using it to authorize changes to protected documentation.

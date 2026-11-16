@@ -2,9 +2,28 @@
 
 **Project:** Java 11 Spring Boot Todo application  
 **Use case:** GitHub Copilot Capstone — Automated Documentation Sync  
-**Status:** Proposed implementation plan for human approval  
+**Status:** Historical plan approved; completion amendment authorized for implementation on 2026-11-16, outputs awaiting acceptance
 **Inputs:** `docs/automated-documentation-sync/requirements.md`, `docs/automated-documentation-sync/architecture.md`, `docs/automated-documentation-sync/design-review.md`  
 **Reference:** `reference/colleague-capstone/` (read-only structural reference)
+
+> The historical task catalog is preserved. The current completion work uses only this repository and the supplied exercise, not an assumed available colleague reference. The actual eighth prompt is `.github/prompts/08-pull-request.prompt.md`; historical alternate filenames below are not executable targets.
+
+## Completion amendment - 2026-11-16
+
+The human requested completion of all eight steps. This authorizes scoped changes to capstone infrastructure/documentation and delivery updates, not changes to protected Todo code or fabricated acceptance of new artifacts.
+
+| ID | Priority | Task and exact targets | Dependencies | Acceptance criteria |
+|---|---|---|---|---|
+| ADS-COMP-01 | P0 | Amend requirements, architecture and design review under `docs/automated-documentation-sync/`. | Existing baseline and supplied exercise | Explicit source/story/clarification record, FR/NFR IDs, diagrams, decisions, and truthful historical/current status. |
+| ADS-COMP-02 | P0 | Complete prompts 01, 02, 06, 07, 08; shared instructions and orchestrator under `.github/`. | ADS-COMP-01 | Seven review areas, real story intake, exact output paths, verification commands, changelog and actual PR delivery procedures. |
+| ADS-COMP-03 | P0 | Add `.github/scripts/workflow.ps1`, `.github/tests/workflow.tests.ps1`. | ADS-COMP-01 | Read-only path/evidence/classification/approval/readiness/structure functions; isolated positive and negative regression cases. |
+| ADS-COMP-04 | P0 | Fix malformed-event handling in `.github/hooks/session-save.js`; add `.github/tests/session-save.test.js` and `.github/workflows/documentation-sync.yml`. | ADS-COMP-01 | Hook invalid inputs fail; eight isolated tests pass; CI runs workflow/document/hook/application checks without write permissions. |
+| ADS-COMP-05 | P0 | Amend implementation-review, verification, technical-reference, CHANGELOG, guide and session records. | ADS-COMP-02, ADS-COMP-03, ADS-COMP-04 | Seven-area review, actual command outcomes, accurate current state, no protected application changes. |
+| ADS-COMP-06 | P0 | Commit/push scoped completion changes and update existing GitHub PR #1 using `pr.md`. | ADS-COMP-05 and successful technical verification | Remote head matches commit, all five PR sections plus file inventory/changelog/CI links; pending human acceptance explicit. |
+
+**Blocked transitions:** Technical implementation and evidence gathering proceed under the human's completion request. Acceptance of new artifacts and ready-to-merge status remain blocked until actual human decisions are recorded. Merge is not part of this authorization. If GitHub access fails, delivery records must state the actual failure rather than pretend a PR was updated.
+
+**Validation:** PowerShell workflow harness and structural validator; Node built-in hook suite; existing Maven unit/integration suite; current base-to-head protected-file diff; remote PR observation. No new application test framework or dependency upgrade is planned.
 
 ## 1. Purpose
 

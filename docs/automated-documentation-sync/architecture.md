@@ -2,7 +2,7 @@
 
 **Project:** Java 11 Spring Boot Todo application  
 **Use case:** GitHub Copilot Capstone — Automated Documentation Sync  
-**Status:** Draft pending explicit human approval  
+**Status:** Historical baseline approved; 2026-11-16 implementation amendment awaiting acceptance
 **Requirements:** `docs/automated-documentation-sync/requirements.md`  
 **Design review:** `docs/automated-documentation-sync/design-review.md`
 
@@ -14,7 +14,7 @@ The system inspects repository evidence, records technical claims with source ci
 
 ## 2. Requirements traceability
 
-The following decisions are proposed architectural requirements aligned with the approved Requirements artifact. They are not represented as human-approved Stage 3 decisions; workflow state records Design Review approval as pending.
+The decisions below describe the historical architecture baseline. Historical approvals are preserved in workflow state; they do not approve the new executable-check amendment in Section 15.
 
 | Proposed or recorded decision | Requirement effect |
 |---|---|
@@ -131,7 +131,7 @@ The orchestrator is the central coordinator for the entire SDLC workflow. It mus
 - Preserve an audit trail of stage outputs.
 - Block PR creation until the implementation review and verification records are complete and acceptable.
 
-The orchestrator is mandatory in this proposed architecture because stage-to-stage coordination and traceability are required. The Design Review approval is pending in `sessions/workflow-state.json`; this rationale does not imply a human-approved Design Review decision.
+The orchestrator is mandatory because stage-to-stage coordination and traceability are required. Historical Design Review approval is recorded in workflow state; current amendments require separate acceptance.
 
 ## 6.1 Eight-stage flow and approval gates
 
@@ -146,7 +146,7 @@ The orchestrator is mandatory in this proposed architecture because stage-to-sta
 | 7. Verification | Reviewed implementation and dispositions, with Implementation-stage approval before progression | `docs/automated-documentation-sync/verification.md` | Human reviews and accepts actual verification outcomes before PR preparation. |
 | 8. Pull Request | Accepted review and verification artifacts plus approved change scope | `docs/automated-documentation-sync/pr.md` or final PR description | Human approves final PR content before submission. |
 
-This flow preserves the distinction between artifact/task acceptance and stage approval. The current state in `sessions/workflow-state.json` records Requirements and Implementation Planning as approved, Architecture as completed pending human approval, Design Review as pending, Implementation as in progress (not approved), and Verification as pending.
+This flow preserves the distinction between artifact/task acceptance and stage approval. The historical baseline stages were subsequently approved, with PR preparation distinct from submission. Consult `activeRevision` and `delivery` in workflow state for the current amendment and observed GitHub state rather than treating historical notes as current status.
 
 ## 7. Human approval gates
 
@@ -264,4 +264,35 @@ The following remain proposed architectural constraints for human review:
 - All stage outputs remain traceable to repository evidence.
 - Review and verification artifacts remain mandatory gates before PR preparation.
 
-The approved implementation plan and workflow state record implementation progress and existing framework artifacts; this Architecture document does not authorize implementation work, approve the Implementation stage, or authorize Verification. Verification remains pending its required human gates.
+The historical approval does not approve the new amendment. The 2026-11-16 human request authorizes implementation work; current review/verification acceptance and merge remain separate decisions.
+
+## 15. Executable completion architecture - 2026-11-16
+
+| Component / technology | Responsibility and rationale |
+|---|---|
+| Copilot orchestrator and eight stage specialists | Human-facing SDLC execution using existing prompts, shared instructions, and skills. These instructions are not an OS-level security boundary. |
+| `.github/scripts/workflow.ps1` / PowerShell | Read-only evidence/path checks, claim classification, stage approval checks, structural validation, and separate PR readiness. Reuses Windows tooling without adding a testing package. |
+| `.github/tests/workflow.tests.ps1` | Isolated fixture-based workflow unit/integration regression cases, including missing/empty evidence and approval failures. |
+| `.github/tests/session-save.test.js` / Node 22 built-in runner | Executes the real hook in isolated temporary repositories; rejects invalid events and checks metadata-only audit logging and state preservation. |
+| `.github/workflows/documentation-sync.yml` | Read-only PR/manual verification on Windows, Java 11, and Node 22. Runs existing Maven tests plus workflow/document/hook checks; does not generate documentation or approve a stage. |
+| `activeRevision` and `delivery` in workflow state | Separate current amendment acceptance from historical approvals and remote PR observations. |
+| Git + GitHub PR | Authorized scoped commit/push and reuse of the branch's existing PR; review and merge remain human-controlled. |
+
+```mermaid
+flowchart TD
+    Human[Human request or supplied story] --> O[Copilot orchestrator]
+    O --> Stages[Eight stage agents and prompts]
+    Stages --> Evidence[Read-only repository evidence]
+    Evidence --> Claims[Classified technical claims and drift]
+    Claims --> Docs[Stage artifacts and technical reference]
+    Docs --> Validate[PowerShell structure and readiness checks]
+    Validate --> Tests[Workflow fixtures, Node hook tests, Maven tests]
+    Tests --> Review[Actual evidence and human acceptance]
+    Review --> PR[Existing GitHub PR and changelog]
+    PR --> Merge[Explicitly authorized human merge]
+    CI[Read-only PR verification CI] --> Tests
+```
+
+Data flows from the supplied story and repository into cited claims, review, verification, and the PR. Missing/malformed inputs produce explicit errors; unsupported claims remain classified, not silently filled. Evidence paths must remain inside the repository, including existing link targets. The hook cannot grant approval. Structural verification may pass while readiness correctly fails because the exact amended artifacts await human acceptance.
+
+The actual eighth prompt is `08-pull-request.prompt.md`; older references to `08-pr.prompt.md` are historical plan wording, not a second executable path.

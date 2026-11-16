@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "gitlab": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@gitlab/mcp-server"
+      ],
+      "env": {
+        "GITLAB_URL": "https://gitlab.example.com",
+        "GITLAB_TOKEN": "${GITLAB_TOKEN}"
+      },
+      "disabled": true
+    }
+  }
+}

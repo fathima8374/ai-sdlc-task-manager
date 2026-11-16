@@ -34,6 +34,10 @@ Required work:
 4. Keep the PR limited to approved capstone documentation changes and not the application or protected project docs.
 5. State that the stale README route remains a documented discrepancy unless a human approves a specific correction.
 6. Require separate human approval of the PR draft, Pull Request stage, and actual submission authorization before creating or submitting an actual GitHub PR.
+7. Update `docs/automated-documentation-sync/CHANGELOG.md` and produce a file-by-file inventory from the actual base-to-head diff. Include actual console evidence or a CI link, not invented test output.
+8. Inspect the configured remote and query existing PRs for the branch before creating anything. Reuse an existing PR rather than creating a duplicate. Record its actual URL, base/head and observed state. Do not retain historical "not submitted" claims when a remote PR is observed.
+9. Run the executable readiness check before declaring the revised PR ready. For an already-open PR, a human request to update the workflow may authorize updating that review surface without approving its new contents: keep review/merge blocked, state pending decisions explicitly, and do not infer acceptance from the existing PR's existence.
+10. Commit only scoped, reviewed changes when authorized, push to the intended branch, and update the actual PR description. Never force-push or merge without explicit authorization. Verify the remote head matches the intended commit. If access or authorization is missing, record a delivery blocker with the exact missing prerequisite rather than claiming completion.
 
 Output:
 - PR description draft or equivalent final PR artifact in the approved capstone location

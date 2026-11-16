@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section id="login-view" class="card" aria-label="Login form section">
+        <h1>Sign in</h1>
+
+        <form id="login-form" novalidate>
+          <div class="field-group">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" autocomplete="username" aria-describedby="login-status" />
+          </div>
+
+          <div class="field-group">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" aria-describedby="login-status" />
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="primary-button">Login</button>
+            <button type="button" id="forgot-password-link" class="link-button">Forgot Password</button>
+          </div>
+        </form>
+
+        <div id="login-status" class="status-region" role="status" aria-live="polite"></div>
+      </section>
+
+      <section id="recovery-view" class="card" hidden aria-label="Password recovery form section">
+        <h2>Reset password</h2>
+
+        <form id="recovery-form" novalidate>
+          <div class="field-group">
+            <label for="recovery-username">Username</label>
+            <input id="recovery-username" name="recovery-username" type="text" autocomplete="username" aria-describedby="recovery-status" />
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="primary-button">Submit</button>
+            <button type="button" id="back-to-login" class="link-button">Back to Login</button>
+          </div>
+        </form>
+
+        <div id="recovery-status" class="status-region" role="status" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="validation.js"></script>
+    <script src="login.js"></script>
+  </body>
+</html>

@@ -1,5 +1,7 @@
 # Implementation Review - Automated Documentation Sync
 
+> Sections below retain the original review and reassessment as history. The 2026-11-16 completion review at the end covers the newly changed framework; earlier human acceptance does not approve this amendment.
+
 ## Review purpose and recommendation
 
 This review evaluates the implemented Copilot workflow framework against the approved implementation plan and the available workflow records. It is distinct from the Design Review: it assesses implementation evidence, scope, configuration, and workflow consistency, rather than re-evaluating the proposed design.
@@ -96,3 +98,70 @@ Conditions for any human Implementation Review approval:
 - Carry the applicable limitations into Verification and record actual checks and results if and when that stage is separately authorized.
 
 This is a recommendation only. No Implementation Review approval is granted by this reassessment.
+
+## Completion implementation review - 2026-11-16
+
+Scope: requirements ADS-011 through ADS-018, Architecture Section 15, and ADS-COMP-01 through ADS-COMP-06. The human requested implementation of this amendment; this agent review does not grant human acceptance. No protected Todo source, application tests, runtime resources, Maven descriptor, or product documents were changed.
+
+The table below is a quick-reference summary. The seven headings that follow are the authoritative per-area assessment.
+
+| Review area | Evidence inspected | Finding / disposition |
+|---|---|---|
+| Correctness | Eight stage prompts and specialists; completion requirements/architecture/plan; `.github/scripts/workflow.ps1` | The existing workflow is reused with explicit intake, seven-area review, verification commands, and real PR delivery contracts. Technical completion is separate from stakeholder acceptance. |
+| Security | Workflow path containment and approval checks; hook whitelist; read-only CI `permissions` | Evidence paths and decisions are validated; hook logs only selected metadata, not whole payloads. These are workflow controls, not a sandbox around Copilot or a comprehensive exploit assessment. |
+| Error Handling | Workflow negative fixtures; hook malformed/non-object events and filesystem failure | Non-object JSON previously produced a success-shaped default hook entry; the hook now rejects it with a nonzero result. Missing/empty evidence and invalid state must fail explicitly. |
+| Test Coverage | `.github/tests/workflow.tests.ps1`; `.github/tests/session-save.test.js`; Maven suite | Workflow fixtures cover negative decisions/inputs and repeatability; eight real-hook subprocess tests cover metadata, malformed input, append, state preservation and filesystem errors. Existing application suite is unchanged. Actual outcomes are recorded in verification. |
+| Code Clarity | Named PowerShell functions, separate Validate/CheckPrReadiness actions, isolated test helpers | Structural success is not confused with readiness; explicit function inputs/outputs support focused checks. |
+| DRY Principle | Specialists delegate to stage prompts; common validation functions; shared evidence skills | Review questions reside in prompt 06; runtime evidence/approval checks are shared rather than cloned into every agent. Documentation points to actual executable paths. |
+| Dependency Safety | `pom.xml`; Maven resolved dependency tree; official Spring advisory below | No new third-party runtime/test package was added. Existing Spring Framework `5.2.6.RELEASE` is within the affected range of CVE-2022-22965; deployment applicability is qualified below. Protected dependencies are not silently upgraded. |
+
+### Correctness
+
+Each component behaves as specified: the eight stage prompts and specialist agents, the completion requirements (ADS-011 through ADS-018), the amended architecture (Section 15), and `.github/scripts/workflow.ps1` implement the exercise's eight stages without altering Todo application behavior. The workflow reuses the existing orchestrator/specialist delegation model rather than introducing a parallel framework. Technical completion of these artifacts is explicitly distinguished from human stakeholder acceptance of their content; agent completion is never treated as approval.
+
+### Security
+
+Secrets are excluded from output: `.github/hooks/session-save.js` logs only a fixed allowlist of fields (`timestamp`, `event`, `agent`, `sessionId`) and never the raw hook payload, so prompts, tokens, or other sensitive fields cannot leak into `sessions/.hook-log.jsonl`. User/agent input is validated: the hook now rejects non-object JSON roots and malformed JSON with a nonzero exit instead of silently defaulting. Workflow evidence paths are resolved and checked for containment within the repository root, rejecting traversal and reparse-point escapes. These are workflow-level controls and CI token-permission restrictions (`contents: read`, pinned action SHAs, no persisted checkout credentials); they are not a claim of a comprehensive security audit or sandboxing of Copilot itself.
+
+### Error Handling
+
+API/tool failures, missing files, and malformed state are handled explicitly rather than masked: the hook returns nonzero on malformed/non-object JSON and on a filesystem write failure, without fabricating a "saved" result; the workflow validator fixtures assert explicit failures for missing or empty evidence files, pending/denied/absent approvals, and a changed approved-artifact hash. No broad catch blocks convert a real failure into a false-positive success.
+
+### Test Coverage
+
+Both the happy path and 'Not Found' / missing-field edge cases are covered. The isolated Node hook suite (`.github/tests/session-save.test.js`) exercises valid metadata capture, empty input, invalid optional field types, malformed/private JSON, non-object roots, repeated appends, authoritative-state non-mutation, and filesystem failure — eight cases, all passing. The PowerShell workflow regression suite (`.github/tests/workflow.tests.ps1`) exercises missing/empty evidence, path traversal and reparse escapes, pending/denied/mismatched approvals, changed-hash detection, and repeatability, entirely in isolated temporary fixtures with no writes to real repository state. The existing Maven suite (42 tests across 8 classes) is unchanged and continues to pass.
+
+### Code Clarity
+
+Function and script responsibilities are self-explanatory without relying on comments to explain intent: `Test-WorkflowPath`, `Get-WorkflowEvidence`, `Compare-DocumentationClaim`, `Test-StageApproval`, `Get-PrReadiness`, and `Test-DocumentationWorkflow` each have a single clear responsibility, and the CLI separates structural `Validate` from decision-gated `CheckPrReadiness` so a passing structural check is never confused with human-approved readiness.
+
+### DRY Principle
+
+Shared evidence/approval/path logic lives once in `.github/scripts/workflow.ps1` and is reused by both the CLI validator and the regression suite, rather than being duplicated across stage prompts or agents. The seven review areas are defined once in `.github/prompts/06-implementation-review.prompt.md` and referenced here rather than redefined per agent. No duplicated, contradictory rule set was introduced.
+
+### Dependency Safety
+
+See the dependency advisory assessment below: no new third-party runtime or test package was added by this completion work, and the one flagged known-affected version (Spring Framework `5.2.6.RELEASE`, within the CVE-2022-22965 affected range) is reported with its advisory source, date, and deployment-applicability limits rather than silently ignored or silently upgraded.
+
+### Dependency advisory assessment
+
+On 2026-11-16, `mvn -B dependency:tree '-Dincludes=org.springframework:spring-webmvc,org.springframework:spring-web,org.springframework:spring-core,com.h2database:h2'` completed successfully and resolved Spring Web/WebMVC/Core `5.2.6.RELEASE` and H2 `1.4.200`, with Spring Boot `2.3.0.RELEASE`.
+
+The official [Spring CVE-2022-22965 advisory](https://spring.io/security/cve-2022-22965/) lists Spring Framework `5.2.19.RELEASE` and earlier as affected and `5.2.20.RELEASE` as a fix. Its described exploit requires JDK 9+, Tomcat, WAR packaging, and Spring MVC/WebFlux. This repository's Maven build uses the default JAR packaging, so the advisory's described WAR exploit is **not established for this deployment**; the advisory itself notes broader possible attack paths. This is a known affected dependency flag, not a claim of confirmed exploitability or a full vulnerability scan. Dependency modernization needs a separately scoped application change.
+
+GitHub Actions are pinned to the immutable commit SHAs returned by each action repository's `v4` tag on 2026-11-16. Checkout does not persist credentials and the workflow token has read-only contents permission. A comprehensive dependency scan is not claimed.
+
+### Current finding dispositions
+
+| ID | Finding | Disposition |
+|---|---|---|
+| IR-COMP-01 | Supplied checklist lacked explicit coverage in the executable workflow procedure. | All seven areas added to prompt 06 and this review. |
+| IR-COMP-02 | Workflow failure/approval behavior was specified only in prose. | Shared executable checks and fixture regression suite added. |
+| IR-COMP-03 | Hook event root could be invalid without an error. | Non-object roots rejected; isolated regression coverage added. |
+| IR-COMP-04 | PR/session prose claimed no submission despite an existing PR and committed framework. | Actual GitHub PR #1 observed and delivery/session/PR records reconciled. |
+| IR-COMP-05 | Legacy Spring dependency has an applicable affected-version advisory. | Flagged with evidence and deployment limits; application dependency upgrade remains outside documentation-only scope. |
+| IR-COMP-06 | Current artifacts are not yet human-accepted. | Readiness must remain blocked; preserve historical approvals without transferring them to the new revision. |
+
+**Recommendation:** Submit the technically verified amendment for human review, retaining documented dependency/deployment limits and pending acceptance. Do not merge automatically or label this agent review as human approval.
+
+An independent read-only peer pass reviewed the completion hook, hook tests, CI, changed agent/prompt contracts, session state, and stage documentation. It identified one delivery-record issue: a note used publication tense while changes were still local. The note now states preparation rather than publication, and remote-head confirmation is required before a published-delivery claim. That pass excluded the separately implemented PowerShell scripts, which are reviewed and executed before delivery.

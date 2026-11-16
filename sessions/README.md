@@ -82,10 +82,14 @@ This directory is reserved for workflow coordination and generated capstone arti
 - `.github/copilot-instructions.md`
 - `.github/agents/orchestrator.agent.md`
 - `.github/agents/documentation-sync.agent.md`
+- `.github/agents/*.agent.md`
 - `.github/instructions/**`
 - `.github/skills/**`
 - `.github/hooks/**`
 - `.github/prompts/**`
+- `.github/scripts/**`
+- `.github/tests/**`
+- `.github/workflows/**`
 - `sessions/**`
 
 ## Protected files
@@ -100,3 +104,11 @@ This directory is reserved for workflow coordination and generated capstone arti
 - `pom.xml`
 - `.github/agents/requirements-generator.agent.md`
 - `reference/colleague-capstone/**`
+
+## Current amendments and delivery observations
+
+Historical `stageStatus`, `humanApproval`, `taskApprovals`, and older agent notes are retained as a decision history. When a completion amendment changes previously accepted artifacts, consult `activeRevision` first. Its human acceptance remains pending until the human reviews the exact new contents; a request to implement is not acceptance.
+
+`delivery` records actual GitHub observations independently from approvals. On 2026-11-16, PR #1 was observed open on the documentation-sync branch, correcting older prose that claimed no submission. This does not invent a missing historical submission decision. Updating an existing requested review surface does not grant merge permission.
+
+Run the dependency-free harness with `powershell -NoProfile -File .github\tests\workflow.tests.ps1`, then `powershell -NoProfile -File .github\scripts\workflow.ps1 -Action Validate`. Use `-Action CheckPrReadiness` separately; pending acceptance must block readiness even if structural validation succeeds. Node 22 is required for `node --test .github\tests\session-save.test.js`; these tests exercise a copy of the hook in temporary fixtures, not this directory's real log.

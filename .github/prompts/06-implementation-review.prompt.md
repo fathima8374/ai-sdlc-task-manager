@@ -18,6 +18,21 @@ Required work:
 5. Confirm that no application code, tests, runtime configuration, or protected docs were modified without explicit approval.
 6. Confirm that the stale README route issue was reported as drift rather than silently corrected.
 7. Produce a review artifact suitable for human approval.
+8. Evaluate every area below explicitly. Record evidence, findings, disposition, and any unperformed assessment for each area; absence of findings is not proof an area was reviewed.
+
+## Mandatory review checklist
+
+| Review area | Required question |
+|---|---|
+| Correctness | Does each component satisfy the functional/non-functional requirements and acceptance criteria? |
+| Security | Are secrets excluded from output, untrusted input validated, and file/tool boundaries respected? |
+| Error Handling | Are API failures, missing files, empty repositories, malformed state, and unavailable tools surfaced without success-shaped fallbacks? |
+| Test Coverage | Do unit/integration and workflow checks cover happy paths, Not Found, missing fields, denied approvals, and stale evidence? |
+| Code Clarity | Are names and control flow understandable, with explicit inputs, outputs, and failures? |
+| DRY Principle | Are shared rules/helpers reused instead of duplicating contradictory logic? |
+| Dependency Safety | Are declared/resolved versions recorded and known advisories assessed with cited sources and applicability limits? |
+
+Dependency Safety must not infer safety from a successful build or an empty package manifest. Record scanner/advisory source, date, findings, and limitations; do not claim a comprehensive vulnerability scan unless one actually ran. Do not upgrade protected application dependencies without separate authorization.
 
 Output:
 - `docs/automated-documentation-sync/implementation-review.md` or the approved equivalent review record

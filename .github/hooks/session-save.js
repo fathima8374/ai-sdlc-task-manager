@@ -18,11 +18,14 @@ process.stdin.on('end', () => {
   if (input.length > 0) {
     try {
       const parsed = JSON.parse(input);
-      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
-        event = parsed;
+      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+        process.stderr.write('session-save: hook event must be a JSON object\n');
+        process.exitCode = 1;
+        return;
       }
-    } catch (error) {
-      process.stderr.write(`session-save: invalid hook event JSON: ${error.message}\n`);
+      event = parsed;
+    } catch {
+      process.stderr.write('session-save: invalid hook event JSON\n');
       process.exitCode = 1;
       return;
     }

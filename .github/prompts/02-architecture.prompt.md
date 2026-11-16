@@ -21,6 +21,7 @@ Required work:
 8. Define the protected file list and documentation-only change controls.
 9. Identify manual trigger policy and explicitly keep it human-initiated unless a later human approval changes it.
 10. Ensure architecture decisions trace back to the approved requirements.
+11. Include a component diagram, data-flow diagram, technology choices with rationale, trust boundaries, failure behavior, and the executable verification/delivery interfaces. Distinguish Copilot instruction-based controls from technically enforced checks.
 
 Output:
 - `docs/automated-documentation-sync/architecture.md`

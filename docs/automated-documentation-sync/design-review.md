@@ -4,7 +4,9 @@
 **Project:** Java 11 Spring Boot Todo application  
 **Inputs:** `docs/automated-documentation-sync/requirements.md`, `docs/automated-documentation-sync/architecture.md`  
 **Additional evidence:** `.github/copilot-instructions.md`, `.github/prompts/03-design-review.prompt.md`, `docs/automated-documentation-sync/technical-reference.md`, `docs/automated-documentation-sync/impl-plan.md`, `sessions/workflow-state.json`, and `.github/hooks/session-save.js`  
-**Status:** Review recommendation only; formal Design Review stage approval is pending.
+**Status:** Historical baseline subsequently approved; 2026-11-16 amendment below is a recommendation awaiting acceptance.
+
+> Sections 1-9 preserve the original review-time observations, including pending statuses that were later resolved. Current historical decisions are in workflow state; they must not be read as approval of the amendment below.
 
 ## 1. Review purpose and recommendation
 
@@ -107,3 +109,19 @@ The optional `.github/hooks/session-save.js` appends a session event record; it 
 The core architecture is coherent and aligned with the approved documentation-only scope, evidence rules, protected-file boundaries, manual invocation, and human-gated workflow. The DR-ADS-08 sequence deviation has an explicit present-day human disposition, and the DR-ADS-09 wording mismatch is corrected. Conditions are that the accepted deviation remain non-retroactive; Design Review, Implementation, Implementation Review, and Verification approvals remain separately gated; Node.js hook runtime validation is reported as pending until actually run; and Verification records actual test commands and outcomes rather than inferred success.
 
 **Formal human approval status:** Pending. `sessions/workflow-state.json` records `humanApproval.design-review.status` as `pending`; no approval, approver, or timestamp is recorded for this Design Review stage. Agent review output and this recommendation do not constitute human approval.
+
+## 10. Completion amendment design review - 2026-11-16
+
+Reviewed requirements ADS-011 through ADS-018 and Architecture Section 15 before the completion implementation. The human's request authorizes implementing the completion work, not approval of these resulting artifacts.
+
+| ID | Risk or gap | Design decision / disposition |
+|---|---|---|
+| DR-COMP-01 | Instructions alone do not prove approval/path failure behavior. | Add read-only executable checks and isolated regression fixtures; do not claim these sandbox Copilot itself. |
+| DR-COMP-02 | A new framework could duplicate the existing eight-stage workflow. | Reuse stage agents/prompts/skills; add shared validation functions only. |
+| DR-COMP-03 | Old approvals might approve new unseen content. | Preserve historical records and add current `activeRevision` acceptance and submission decisions; readiness blocks on pending acceptance. |
+| DR-COMP-04 | Hook tests could mutate live audit/state files. | Copy the actual hook into isolated temporary repositories and clean only those fixtures. |
+| DR-COMP-05 | Historical PR prose is not proof of actual delivery. | Query GitHub, reuse PR #1, record actual head/base/URL, and never infer approval from PR existence. |
+| DR-COMP-06 | Node unavailable locally and Java version differs from target. | Restore a checksum-verified portable Node runtime in session storage; add Windows CI using Java 11 and Node 22. Record local Java 25 separately. |
+| DR-COMP-07 | Scope creep into legacy application dependencies. | Record dependency advisories and applicability limits in review; leave protected `pom.xml` unchanged. |
+
+**Recommendation:** Implement the small executable verification layer and revised stage contracts. Manual document generation remains the scope; CI verifies only. No human acceptance or merge approval is granted by this review.

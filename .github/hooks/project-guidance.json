@@ -1,0 +1,11 @@
+{
+  "project": "client-auth-capstone",
+  "summary": "This is a static browser-only login and password recovery interface. Validate input formats in the browser and avoid any authentication or network dependency.",
+  "entryPoint": "client/index.html",
+  "rules": [
+    "Open the HTML directly in a browser with local assets.",
+    "Keep validation logic in client/validation.js and reuse it across login and recovery flows.",
+    "Do not add a backend, database, or API.",
+    "Do not expose or log the password value in status messages."
+  ]
+}

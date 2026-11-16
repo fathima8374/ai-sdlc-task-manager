@@ -86,3 +86,11 @@ Prefer the smallest viable framework that satisfies the assignment:
 - PR description template
 
 Avoid copying unrelated business logic or application behavior from reference projects. Adapt the reference framework only for structure, discipline, and workflow completeness.
+
+## 9. Executable verification and revised artifacts
+
+- Run `.github/scripts/workflow.ps1 -Action Validate` and the workflow/hook suites before declaring the framework technically complete. Run `-Action CheckPrReadiness` separately; structural validity is not human approval.
+- Workflow scripts/tests and verification CI under `.github/scripts/`, `.github/tests/`, and `.github/workflows/` are capstone infrastructure, not authorization to change Todo code or its tests.
+- Keep previous human decisions as history. `activeRevision` in workflow state identifies amendments whose exact new contents still require human acceptance; historical approvals must not silently approve changed artifacts.
+- A user request to complete implementation authorizes scoped work, not fabricated review decisions or merge. Existing PRs may be updated as review surfaces when requested, but readiness remains blocked until applicable revised-artifact approvals are recorded.
+- A verification CI run does not initiate documentation generation. Generation remains manually invoked.

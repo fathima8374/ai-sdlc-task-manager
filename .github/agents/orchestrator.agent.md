@@ -72,6 +72,8 @@ Delegation rules:
 
 ## Core operating model
 
+For an explicitly requested completion amendment, read `activeRevision` before historical stage records. The human may authorize implementing a scoped amendment without having accepted its unseen outputs. Run technical checks and prepare the requested review artifacts, but do not grant current stage acceptance or ready-to-merge status from that implementation authorization. Historical decisions remain intact. Query `delivery` and the actual remote before repeating historical "not submitted" claims.
+
 1. Receive a human request or stage selection.
 2. Validate the current repository state, scope, and required inputs.
 3. Confirm the relevant previous stage artifact exists and was approved.
@@ -269,6 +271,14 @@ The orchestrator must maintain explicit state in `sessions/workflow-state.json` 
 - human decisions requested
 
 The `SubagentStop` hook appends specialist-completion metadata to `sessions/.hook-log.jsonl` as a supplementary audit trail only. The orchestrator remains responsible for all authoritative workflow-state updates, task status, artifacts, and human approval records. Workflow continuity must not depend on the hook being available.
+
+## Executable completion checks
+
+- Read `.github/scripts/workflow.ps1` and use `-Action Validate` for structure/evidence checks, independently of `-Action CheckPrReadiness` for human-decision gates.
+- Run `.github/tests/workflow.tests.ps1`, `node --test .github/tests/session-save.test.js`, and the existing Maven test suite through the Verification prompt. A technical pass cannot approve an amended artifact.
+- Include all seven review areas from prompt 06 and a changelog entry in `docs/automated-documentation-sync/CHANGELOG.md`.
+- Existing PR #1 is an observed review surface, not evidence that prior submission authorization was recorded. When the human requests workflow completion, update that existing PR instead of creating a duplicate, accurately stating that new contents still require human acceptance.
+- Do not merge an existing PR or mark an amendment accepted without its explicit human decision. Record actual remote state and pending decisions independently.
 
 A task/output approval applies only to the exact task or artifact named in its record. It does not complete or approve the enclosing stage. A stage is not complete until:
 - the required artifact exists;
