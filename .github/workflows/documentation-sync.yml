@@ -1,0 +1,46 @@
+name: Documentation Sync Verification
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/**'
+      - 'docs/automated-documentation-sync/**'
+      - 'sessions/**'
+      - 'src/**'
+      - 'pom.xml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '11'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Workflow regression suite
+        shell: powershell
+        run: .\.github\tests\workflow.tests.ps1
+      - name: Document structure and evidence checks
+        shell: powershell
+        run: .\.github\scripts\workflow.ps1 -Action Validate
+      - name: Hook regression suite
+        run: node --test .github\tests\session-save.test.js
+      - name: Application unit and integration suite
+        run: mvn -B test
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: documentation-sync-test-evidence
+          path: target/surefire-reports/
+          if-no-files-found: warn
